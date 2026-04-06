@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shelf Exam Master Guide — April 27</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f2f5;--card:#ffffff;--border:#e2e6ea;--text:#1a202c;--muted:#6b7280;
+  --heme:#c0392b;--heme-bg:#fff5f5;--heme-light:#fecaca;
+  --neuro:#6d28d9;--neuro-bg:#f5f3ff;--neuro-light:#ddd6fe;
+  --em:#d97706;--em-bg:#fffbeb;--em-light:#fde68a;
+  --icu:#1d4ed8;--icu-bg:#eff6ff;--icu-light:#bfdbfe;
+  --peds:#059669;--peds-bg:#f0fdf4;--peds-light:#a7f3d0;
+  --done-bg:#f0fdf4;--done-border:#86efac;
+}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
+
+/* ── HEADER ── */
+.header{background:#0f172a;color:#f1f5f9;padding:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.header-inner{padding:12px 20px 10px}
+.header-row1{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.header-title{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.exam-badge{background:#1e3a5f;border:1px solid #2563eb;color:#93c5fd;font-size:11px;padding:4px 10px;border-radius:20px;font-family:'IBM Plex Mono',monospace}
+.overall-progress{background:#1e293b;border-radius:10px;padding:10px 14px;display:flex;gap:20px;align-items:center}
+.ovr-label{font-size:11px;color:#94a3b8;white-space:nowrap}
+.ovr-pct{font-size:24px;font-weight:700;color:#f8fafc;font-family:'IBM Plex Mono',monospace;min-width:52px}
+.ovr-bar-wrap{flex:1}
+.bar-track{background:#334155;border-radius:4px;height:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#2563eb,#06b6d4);transition:width .5s ease}
+.rot-bars{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.rot-mini{background:#1e293b;border-radius:6px;padding:6px 8px;text-align:center;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.rot-mini:hover{background:#243552}
+.rot-mini.active-tab{border-color:var(--accent,#2563eb)}
+.rot-mini-label{font-size:9px;color:#94a3b8;margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.rot-mini-pct{font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace}
+.rot-mini-bar{height:3px;background:#334155;border-radius:2px;margin-top:4px;overflow:hidden}
+.rot-mini-fill{height:100%;border-radius:2px;transition:width .5s}
+.days-left{font-size:11px;color:#f59e0b;font-family:'IBM Plex Mono',monospace;margin-top:4px;text-align:right}
+
+/* ── PANEL BUTTONS ── */
+.panel-bar{background:#0f172a;border-bottom:1px solid #1e293b;padding:8px 20px;display:flex;gap:8px;flex-wrap:wrap}
+.panel-btn{background:transparent;border:1px solid #334155;color:#94a3b8;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;transition:all .2s;font-family:'IBM Plex Sans',sans-serif}
+.panel-btn:hover,.panel-btn.active{background:#1e3a5f;border-color:#3b82f6;color:#93c5fd}
+
+/* ── SLIDING PANELS ── */
+.panel{display:none;background:#0f172a;border-bottom:2px solid #1e293b;padding:20px;color:#e2e8f0;animation:slideDown .25s ease}
+.panel.open{display:block}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:12px}
+.panel-card{background:#1e293b;border-radius:10px;padding:14px}
+.panel-card h3{font-size:13px;font-weight:600;color:#f1f5f9;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.panel-card p,.panel-card li{font-size:12px;color:#94a3b8;line-height:1.7;margin-bottom:4px}
+.panel-card ul{padding-left:14px}
+.highlight{background:#1e3a5f;border-left:3px solid #3b82f6;padding:8px 12px;border-radius:0 6px 6px 0;margin:8px 0}
+.highlight p{color:#bfdbfe!important}
+.tip-box{background:#1c3a2a;border-left:3px solid #10b981;padding:8px 12px;border-radius:0 6px 6px 0;margin:8px 0}
+.tip-box p{color:#a7f3d0!important}
+.warn-box{background:#3a1c1c;border-left:3px solid #ef4444;padding:8px 12px;border-radius:0 6px 6px 0;margin:8px 0}
+.warn-box p{color:#fca5a5!important}
+.cs-tag{display:inline-block;background:#312e81;color:#c7d2fe;font-size:9px;padding:2px 6px;border-radius:3px;margin-right:4px;font-weight:600}
+
+/* ── MAIN CONTENT ── */
+.main{padding:16px 20px;max-width:980px;margin:0 auto}
+.rot-header{border-radius:12px;padding:16px 18px;margin-bottom:14px;border-left:5px solid}
+.rot-header-row{display:flex;justify-content:space-between;align-items:flex-start}
+.rot-title{font-size:18px;font-weight:700}
+.rot-sub{font-size:12px;margin-top:3px;color:#6b7280}
+.rot-stats{text-align:right}
+.rot-pct-big{font-size:28px;font-weight:800;font-family:'IBM Plex Mono',monospace}
+.rot-hours{font-size:11px;color:#6b7280;margin-top:2px}
+.rot-bar-track{height:5px;background:#e2e8f0;border-radius:3px;margin-top:10px;overflow:hidden}
+.rot-bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.weight-badge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;margin-left:8px}
+
+/* ── TOPIC CARDS ── */
+.topic-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:border-color .2s,background .2s}
+.topic-card.completed{background:var(--done-bg);border-color:var(--done-border)}
+.topic-header{padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;user-select:none}
+.topic-header:hover{background:rgba(0,0,0,.02)}
+.big-cb{width:24px;height:24px;border-radius:7px;border:2.5px solid #d1d5db;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:14px;transition:all .2s;background:white}
+.big-cb.checked{background:#16a34a;border-color:#16a34a;color:white}
+.topic-info{flex:1;min-width:0}
+.topic-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap;line-height:1.4}
+.added-badge{font-size:9px;background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:3px;padding:1px 5px;white-space:nowrap}
+.yield-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.topic-meta{font-size:11px;color:#9ca3af;margin-top:3px;display:flex;gap:12px}
+.subtopic-progress{height:2px;background:#e2e8f0;border-radius:1px;margin-top:5px}
+.subtopic-progress-fill{height:100%;border-radius:1px;transition:width .3s}
+.topic-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;margin-left:8px}
+.time-chip{font-size:10px;background:#f1f5f9;color:#64748b;padding:2px 7px;border-radius:10px;font-family:'IBM Plex Mono',monospace;white-space:nowrap}
+.expand-btn{font-size:10px;color:#9ca3af;cursor:pointer;background:none;border:none;padding:2px 4px}
+
+/* ── SUBTOPICS ── */
+.subtopics-wrap{border-top:1px solid #f3f4f6;padding:8px 14px 12px 48px;display:none}
+.subtopics-wrap.open{display:block}
+.sub-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid #f9fafb}
+.sub-item:last-child{border-bottom:none}
+.sub-cb{width:16px;height:16px;border-radius:4px;border:2px solid #d1d5db;background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:2px;font-size:10px;transition:all .15s}
+.sub-cb.checked{background:#16a34a;border-color:#16a34a;color:white}
+.sub-text{font-size:12px;color:#374151;line-height:1.6}
+.sub-text.done-text{text-decoration:line-through;color:#9ca3af}
+
+/* ── SUGGESTED GROUPS ── */
+.groups-section{margin-top:20px}
+.groups-title{font-size:13px;font-weight:700;color:#374151;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.group-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.group-card{background:white;border:1px solid var(--border);border-radius:10px;padding:12px}
+.group-label{font-size:12px;font-weight:700;margin-bottom:4px}
+.group-items{font-size:11px;color:#6b7280;line-height:1.8}
+.group-time{font-size:10px;color:#9ca3af;margin-top:5px;font-family:'IBM Plex Mono',monospace}
+
+/* ── MISC ── */
+.reset-btn{font-size:10px;background:none;border:1px solid #e2e8f0;color:#9ca3af;padding:3px 8px;border-radius:5px;cursor:pointer;margin-top:4px}
+.reset-btn:hover{background:#fee2e2;color:#dc2626;border-color:#fca5a5}
+.tab-content{display:none}.tab-content.active{display:block}
+.yield-legend{display:flex;gap:14px;margin-bottom:12px;font-size:11px;color:#6b7280;align-items:center;flex-wrap:wrap}
+.yield-legend span{display:flex;align-items:center;gap:5px}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-row1">
+      <div>
+        <div class="header-title">📋 Shelf Exam Master Guide</div>
+        <div id="daysLeft" class="days-left"></div>
+      </div>
+      <div class="exam-badge">April 27 · MBRU Combo Shelf</div>
+    </div>
+    <div class="overall-progress">
+      <div>
+        <div class="ovr-label">OVERALL</div>
+        <div class="ovr-pct" id="ovr-pct">0%</div>
+      </div>
+      <div class="ovr-bar-wrap">
+        <div class="bar-track"><div class="bar-fill" id="ovr-bar" style="width:0%"></div></div>
+        <div class="rot-bars" id="rot-mini-bars"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PANEL BUTTONS ══ -->
+<div class="panel-bar">
+  <button class="panel-btn" onclick="togglePanel('study')">📖 How to Study</button>
+  <button class="panel-btn" onclick="togglePanel('cheat')">📄 Cheat Sheet System</button>
+  <button class="panel-btn" onclick="togglePanel('plan')">🗓️ Day Groupings</button>
+  <button class="panel-btn" onclick="togglePanel('adhd')">🧠 Mariam's Tips</button>
+  <button class="panel-btn" style="margin-left:auto;color:#ef4444;border-color:#fca5a5" onclick="confirmReset()">↺ Reset All</button>
+</div>
+
+<!-- ══ PANELS ══ -->
+<div id="panel-study" class="panel">
+  <div style="font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:12px">📖 The Study System — One Pass, Maximum Retention</div>
+  <div class="panel-grid">
+    <div class="panel-card">
+      <h3>🎯 Active Recall Method</h3>
+      <p>For each topic, use <strong style="color:#f1f5f9">Explain → Test → Fix</strong>:</p>
+      <ul>
+        <li>Watch/read the content <strong>simultaneously taking notes</strong> (you know this works best for you)</li>
+        <li>After each subtopic, close notes and recite key facts out loud or write from memory</li>
+        <li>Compare back to notes, fix gaps immediately — do NOT re-read passively</li>
+        <li>Create one question per subtopic ("How do you differentiate TTP from HUS?") in your cheat sheet</li>
+      </ul>
+      <div class="tip-box"><p>✅ The goal is retrieval, not re-reading. If you can say it without looking, you own it.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>⏱️ The Flow: Topic by Topic</h3>
+      <ol style="padding-left:14px;font-size:12px;color:#94a3b8;line-height:2">
+        <li>Pick 1-2 high-yield topics for the session</li>
+        <li>Watch/read the source material (<strong style="color:#f1f5f9">Dirty Medicine / Zero to Finals / Sketchy</strong>)</li>
+        <li>Build cheat sheet slide WHILE watching (concurrent — never after)</li>
+        <li>Cover the cheat sheet → bullet-point recall from memory</li>
+        <li>Check subtopics off as you truly master each point</li>
+        <li>Do 3-5 MCQs on that topic immediately (Amboss/Pastest)</li>
+      </ol>
+      <div class="highlight"><p>🔑 Never move on until you can answer: What is it? How does it present? What do you investigate? How do you treat?</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>🔁 Spaced Repetition (No Anki Required)</h3>
+      <p><strong style="color:#f1f5f9">Day 1:</strong> Study topics → build cheat sheet slide<br>
+      <strong style="color:#f1f5f9">Day 3:</strong> Cover slide, recall → 5 min review<br>
+      <strong style="color:#f1f5f9">Day 7:</strong> Flip through entire deck, cover answers<br>
+      <strong style="color:#f1f5f9">Day 14+ (review week):</strong> Full deck rapid-fire pass</p>
+      <div class="tip-box"><p>✅ Your PowerPoint cheat sheet IS your Anki deck. Q on one side, A on the other.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>📊 MCQ Strategy</h3>
+      <p>Use past exam patterns as your compass:</p>
+      <ul>
+        <li><strong style="color:#f1f5f9">Pattern recognition:</strong> "Fever + neuro + thrombocytopenia + MAHA = TTP → plasma exchange"</li>
+        <li>Do MCQs in <strong style="color:#f1f5f9">tutor mode</strong> (see explanation after each Q)</li>
+        <li>For wrong answers: add a red flag bullet to the relevant cheat sheet slide</li>
+        <li>Do at least <strong style="color:#f1f5f9">5-10 questions per topic</strong> after your cheat sheet is made</li>
+      </ul>
+      <div class="warn-box"><p>⚠️ Don't do question banks before making your cheat sheet — you'll guess, not learn.</p></div>
+    </div>
+  </div>
+</div>
+
+<div id="panel-cheat" class="panel">
+  <div style="font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:12px">📄 The Cheat Sheet System — PowerPoint Edition</div>
+  <div class="panel-grid">
+    <div class="panel-card">
+      <h3>💡 Why PowerPoint?</h3>
+      <ul>
+        <li>Fast to build (drag boxes, color code, copy-paste tables)</li>
+        <li>Easy to review on your iPad/phone anywhere</li>
+        <li>Can add images (ECGs, rash photos, CXR) directly</li>
+        <li>Can run a slideshow for rapid self-testing</li>
+        <li>One rotation = One PPT file (5 files total)</li>
+      </ul>
+      <div class="tip-box"><p>✅ 1 SLIDE = 1 TOPIC. Max 1-2 slides per big topic. If it needs more than 2 slides, you're over-noting.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>📐 Slide Template (Every Slide)</h3>
+      <p style="margin-bottom:6px"><strong style="color:#f1f5f9">Top strip:</strong> Topic name + yield tag (⭐⭐⭐ HIGH)</p>
+      <p style="margin-bottom:6px"><strong style="color:#f1f5f9">Left column (~60%):</strong></p>
+      <ul>
+        <li>Pathophysiology in 1 sentence</li>
+        <li>Key clinical features (bullet list, max 5)</li>
+        <li>Investigation of choice (bold + red)</li>
+        <li>Management (numbered steps)</li>
+      </ul>
+      <p style="margin-bottom:6px;margin-top:6px"><strong style="color:#f1f5f9">Right column (~40%):</strong></p>
+      <ul>
+        <li>Mnemonic or table (e.g., CRAB for MM)</li>
+        <li>Key differentiating feature from DDx</li>
+        <li>1 "EXAM TRAP" box in red (e.g., "First step = IV fluids NOT bisphosphonates")</li>
+      </ul>
+      <div class="highlight"><p>🔑 Exam traps are the most important boxes — they're exactly what the MCQs test.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>⚡ Speed Build Method</h3>
+      <p><strong style="color:#f1f5f9">Set a 20-minute timer per slide.</strong> If not done — stop anyway and finish during review.</p>
+      <ol style="padding-left:14px;font-size:12px;color:#94a3b8;line-height:2">
+        <li>Open blank PPT slide</li>
+        <li>Paste in the 4-question framework (What/How/Investigate/Treat)</li>
+        <li>Fill in while source material is still playing</li>
+        <li>Add ONE color per rotation (red=heme, purple=neuro, orange=EM, blue=ICU, green=peds)</li>
+        <li>Done? Cover the right half — can you recall the exam traps?</li>
+      </ol>
+      <div class="tip-box"><p>✅ Use a PPT template with the columns pre-built. Set it up once — then duplicate for every topic.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>🗂️ Active Recall Using Your Slides</h3>
+      <p><strong style="color:#f1f5f9">Fold method (analog alternative):</strong> Print 2 slides per page, fold in half. Question/title on left, answer on right.</p>
+      <p style="margin-top:8px"><strong style="color:#f1f5f9">Digital method:</strong></p>
+      <ul>
+        <li>Duplicate every slide → Delete answers from duplicate → Put question version first</li>
+        <li>Slideshow mode → Read the question slide → mentally answer → advance to answer slide</li>
+        <li>Works perfectly on iPad in Keynote during commute</li>
+      </ul>
+      <div class="warn-box"><p>⚠️ NEVER just re-read your slides passively. Cover. Recall. Check. That's the only way.</p></div>
+    </div>
+  </div>
+</div>
+
+<div id="panel-plan" class="panel">
+  <div style="font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:4px">🗓️ Suggested Study Groupings</div>
+  <p style="font-size:12px;color:#94a3b8;margin-bottom:14px">Place these groups on your days however you like. Each group is ~3-4h of focused work. You have ~12 study days (Apr 6-17/18) before your review week.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px">
+    <div class="group-card" style="border-left:4px solid var(--em)">
+      <div class="group-label" style="color:var(--em)">🚨 EM Block 1 — ECG Mastery</div>
+      <div class="group-items">• ECG interpretation (ALL rhythms)<br>• ACLS / Cardiac arrest management<br>• Bradyarrhythmias + pacemakers</div>
+      <div class="group-time">⏱ ~3.5h · Very High Yield (25% of exam)</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--em)">
+      <div class="group-label" style="color:var(--em)">🚨 EM Block 2 — Shock & Chest Pain</div>
+      <div class="group-items">• Shock types (all 4 + vasopressors)<br>• Chest pain approach (ACS, dissection, PE, tamponade)<br>• Anaphylaxis</div>
+      <div class="group-time">⏱ ~3h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--em)">
+      <div class="group-label" style="color:var(--em)">🚨 EM Block 3 — Trauma, Tox & DKA</div>
+      <div class="group-items">• ATLS + burns (Parkland)<br>• Poisoning / toxidrome recognition<br>• DKA full management protocol<br>• GI bleed + abdominal pain</div>
+      <div class="group-time">⏱ ~3.5h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--icu)">
+      <div class="group-label" style="color:var(--icu)">🫁 ICU Block 1 — Respiratory</div>
+      <div class="group-items">• ARDS (Berlin criteria + vent strategy)<br>• Mechanical ventilation + NIV<br>• Oxygen delivery devices<br>• Respiratory failure type I vs II</div>
+      <div class="group-time">⏱ ~3.5h · Very High Yield (25% of exam)</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--icu)">
+      <div class="group-label" style="color:var(--icu)">🫁 ICU Block 2 — Metabolic + Shock</div>
+      <div class="group-items">• ABG interpretation + acid-base<br>• Sepsis / septic shock (Surviving Sepsis)<br>• Cardiogenic shock<br>• AKI + electrolytes (hyperK, hypoNa)</div>
+      <div class="group-time">⏱ ~3.5h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--peds)">
+      <div class="group-label" style="color:var(--peds)">👶 Peds Block 1 — Foundations</div>
+      <div class="group-items">• Developmental milestones (ALL domains)<br>• Vaccines (UAE schedule)<br>• Fever in children + FWS<br>• Failure to thrive</div>
+      <div class="group-time">⏱ ~3h · Very High Yield (25% of exam)</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--peds)">
+      <div class="group-label" style="color:var(--peds)">👶 Peds Block 2 — Rashes + Kawasaki</div>
+      <div class="group-items">• Childhood rashes (all 7 + differentials)<br>• Kawasaki disease<br>• Febrile seizures<br>• Pediatric vaccinations</div>
+      <div class="group-time">⏱ ~2.5h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--peds)">
+      <div class="group-label" style="color:var(--peds)">👶 Peds Block 3 — Resp + Metabolic</div>
+      <div class="group-items">• Asthma in children<br>• Cystic fibrosis, croup, bronchiolitis<br>• DKA in children<br>• Nephrotic syndrome</div>
+      <div class="group-time">⏱ ~3h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--peds)">
+      <div class="group-label" style="color:var(--peds)">👶 Peds Block 4 — Cardio + Special</div>
+      <div class="group-items">• Congenital heart disease<br>• Growth + puberty disorders<br>• DMD, GBS in children, SMA<br>• Neonatal emergencies, obesity</div>
+      <div class="group-time">⏱ ~2.5h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--heme)">
+      <div class="group-label" style="color:var(--heme)">🩸 Heme Block 1 — Anemias + Bleeding</div>
+      <div class="group-items">• All anemias (microcytic/macro/hemolytic)<br>• Sickle cell, spherocytosis, thalassemia<br>• ITP/TTP/HUS/DIC<br>• Hemophilia + vWD + coagulation</div>
+      <div class="group-time">⏱ ~3.5h · (12.5% of exam)</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--heme)">
+      <div class="group-label" style="color:var(--heme)">🩸 Heme Block 2 — Malignancy + Onc Emergencies</div>
+      <div class="group-items">• Leukemias (ALL/AML/CML/CLL markers)<br>• Lymphoma (Hodgkin vs NHL)<br>• Multiple myeloma<br>• Tumor lysis, hypercalcemia, neutropenic sepsis, SVC syndrome</div>
+      <div class="group-time">⏱ ~3h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--heme)">
+      <div class="group-label" style="color:var(--heme)">🩸 Heme Block 3 — Palliative + Ethics</div>
+      <div class="group-items">• Palliative care principles<br>• DNR/AND/Consent rules (UAE specifics)<br>• Opioid pharmacology + naloxone<br>• Transfusion reactions (all types)</div>
+      <div class="group-time">⏱ ~1.5h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--neuro)">
+      <div class="group-label" style="color:var(--neuro)">🧠 Neuro Block 1 — Stroke + Seizures</div>
+      <div class="group-items">• Stroke (ischemic + hemorrhagic, tPA rules)<br>• Status epilepticus + AEDs<br>• GCS calculation + practice</div>
+      <div class="group-time">⏱ ~3h · (12.5% of exam)</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--neuro)">
+      <div class="group-label" style="color:var(--neuro)">🧠 Neuro Block 2 — Headaches + Movement</div>
+      <div class="group-items">• Headache types (migraine, cluster, SAH, IIH, GCA)<br>• Parkinson's disease (motor + non-motor)<br>• Essential tremor vs Parkinson's</div>
+      <div class="group-time">⏱ ~2.5h</div>
+    </div>
+    <div class="group-card" style="border-left:4px solid var(--neuro)">
+      <div class="group-label" style="color:var(--neuro)">🧠 Neuro Block 3 — Nerve + MS + MG</div>
+      <div class="group-items">• MS (presentations, MRI, CSF, treatment)<br>• Meningitis/encephalitis (CSF analysis)<br>• GBS + MG<br>• Cranial nerve palsies, peripheral neuropathy</div>
+      <div class="group-time">⏱ ~3h</div>
+    </div>
+  </div>
+</div>
+
+<div id="panel-adhd" class="panel">
+  <div style="font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:12px">🧠 Personalized Tips (Based on How You Work Best)</div>
+  <div class="panel-grid">
+    <div class="panel-card">
+      <h3>⚡ Task Initiation</h3>
+      <p>Your biggest enemy isn't the content — it's starting. Use the <strong style="color:#f1f5f9">2-minute rule</strong>: commit only to "opening the PPT and writing one bullet." Once you start, momentum builds.</p>
+      <div class="tip-box"><p>✅ Set an external timer (25 min Pomodoro). The constraint is a permission slip to start. After 25 min, you can stop — but you probably won't.</p></div>
+      <p style="margin-top:8px">Use this checklist to choose your first topic each morning — pick whichever subtopic feels <em>least</em> aversive to start the session.</p>
+    </div>
+    <div class="panel-card">
+      <h3>📅 Time to Exam: Apr 6 → Apr 27</h3>
+      <p><strong style="color:#f1f5f9">21 days total · 12 study days · 7-9 review days</strong></p>
+      <ul style="margin-top:6px">
+        <li>Apr 6-8: EM Block 1 + 2</li>
+        <li>Apr 9-10: ICU Block 1 + 2</li>
+        <li>Apr 11-12: Peds Block 1 + 2</li>
+        <li>Apr 13-14: Peds Block 3 + 4</li>
+        <li>Apr 15: Heme Block 1</li>
+        <li>Apr 16: Heme Block 2 + 3</li>
+        <li>Apr 17: Neuro Block 1</li>
+        <li>Apr 18: EM Block 3 + Neuro Block 2</li>
+        <li>Apr 19: Neuro Block 3 (done!)</li>
+        <li><strong style="color:#10b981">Apr 20-26: Review week only</strong></li>
+      </ul>
+      <div class="warn-box"><p>⚠️ This schedule is tight but doable at ~3-4h/day. Protect it like your rotation schedule.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>🎯 Micro-Wins Are Non-Negotiable</h3>
+      <p>Each subtopic checkbox = a micro-win. Checking off subtopics is specifically designed for your brain — the dopamine hit from progress is real and intentional.</p>
+      <div class="tip-box"><p>✅ After every 10 subtopics checked off, take a genuine break. Not a "one more thing" break — a real one.</p></div>
+      <p style="margin-top:8px">Watch the overall percentage tick up. That number is your exam confidence meter.</p>
+    </div>
+    <div class="panel-card">
+      <h3>📚 Best Sources for First-Pass Learning</h3>
+      <ul>
+        <li><strong style="color:#f1f5f9">Dirty Medicine (YouTube)</strong> — Fast, yield-focused, great for heme/onc + peds + neuro</li>
+        <li><strong style="color:#f1f5f9">Zero to Finals</strong> — Brilliant structure, perfect for your note-taking style</li>
+        <li><strong style="color:#f1f5f9">Dr. Seheult ICU/Critical Care</strong> — For ARDS, ventilation concepts</li>
+        <li><strong style="color:#f1f5f9">Geeky Medics</strong> — Exam technique + clinical signs</li>
+        <li><strong style="color:#f1f5f9">Osmosis</strong> — When you want pathophysiology visual</li>
+      </ul>
+      <div class="highlight"><p>🔑 Concurrent note-taking (your preferred style) works best with YouTube. Set 1.5x speed.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>😮‍💨 Overwhelm Protocol</h3>
+      <p>When it feels like too much, zoom in: <strong style="color:#f1f5f9">close all tabs. Open this guide. Pick ONE subtopic. Start it.</strong></p>
+      <p style="margin-top:6px">You have 15 grouping blocks. That's it. 15 well-defined sessions between now and April 19. That is completely manageable.</p>
+      <div class="tip-box"><p>✅ You've already done the hardest part — building this framework. Now just execute the blocks one at a time.</p></div>
+    </div>
+    <div class="panel-card">
+      <h3>🏥 Leverage Your Clinical Memory</h3>
+      <p>You just did 36 EM cases at Rashid + Mediclinic. Every case you saw is a memory hook — use it!</p>
+      <ul style="margin-top:6px">
+        <li>When you study sepsis: picture the septic patients you managed</li>
+        <li>When you study TTP: picture the pentad from your EM notes</li>
+        <li>When you study stroke: remember BEFAST from your rotations</li>
+      </ul>
+      <div class="highlight"><p>🔑 Clinical memory is dramatically more durable than textbook memorization. You have more than you think.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN CONTENT ══ -->
+<div class="main">
+  <!-- Tab nav is the mini bars in header — clicking them switches here -->
+  <div id="tab-contents"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════════
+const ROTS = [
+  {id:'em',emoji:'🚨',label:'Emergency Med',weight:25,color:'#d97706',bg:'#fffbeb',border:'#d97706',light:'#fde68a'},
+  {id:'icu',emoji:'🫁',label:'ICU / Crit Care',weight:25,color:'#1d4ed8',bg:'#eff6ff',border:'#1d4ed8',light:'#bfdbfe'},
+  {id:'peds',emoji:'👶',label:'Pediatrics',weight:25,color:'#059669',bg:'#f0fdf4',border:'#059669',light:'#a7f3d0'},
+  {id:'heme',emoji:'🩸',label:'Heme / Onc',weight:12.5,color:'#c0392b',bg:'#fff5f5',border:'#c0392b',light:'#fecaca'},
+  {id:'neuro',emoji:'🧠',label:'Neurology',weight:12.5,color:'#6d28d9',bg:'#f5f3ff',border:'#6d28d9',light:'#ddd6fe'},
+];
+
+const TOPICS = {
+em:[
+  {id:'e1',name:'ECG Interpretation — Rhythm to Diagnosis',time:150,yield:'⭐⭐⭐',subs:[
+    'Systematic approach: Rate → Rhythm → Axis → P waves → PR interval → QRS duration → ST/T changes → QTc',
+    'STEMI criteria: ST elevation ≥1mm (limb leads) or ≥2mm (V1-V6) in ≥2 contiguous leads; reciprocal depression; LBBB + symptoms = STEMI equivalent',
+    'NSTEMI vs UA: ST depression or T-wave inversion; troponin elevated=NSTEMI, normal=UA; treat same initially',
+    'First-degree AV block: PR >200ms; benign; no treatment needed',
+    'Mobitz I (Wenckebach): progressively lengthening PR → dropped QRS (grouped beats); generally benign',
+    'Mobitz II: fixed PR → sudden dropped QRS without warning; can progress to complete block → needs pacing',
+    'Complete (3rd degree) heart block: P waves and QRS completely dissociated; escape rhythm; atropine temporizing → transvenous pacing',
+    'AF: irregularly irregular, absent P waves; rate vs rhythm control; anticoagulate (CHA₂DS₂-VASc); unstable → cardiovert',
+    'SVT (AVNRT): regular narrow complex, P waves buried; vagal maneuver → adenosine 6mg (rapid IV push, warn patient) → 12mg; unstable → synchronized cardioversion',
+    'VT: wide complex (>120ms), regular; stable → IV amiodarone 300mg; unstable pulse→synchronized cardioversion; pulseless→defibrillate',
+    'VF: chaotic no QRS; pulseless → IMMEDIATE unsynchronized defibrillation 200J; CPR between shocks',
+    'Torsades de Pointes: polymorphic VT twisting around baseline; prolonged QTc; IV Mg sulphate 2g (1st line regardless of Mg level); correct electrolytes; stop QT-prolonging drugs',
+    'Electrolyte ECG changes: hyperK = peaked T → wide QRS → sine wave; hypoK = flat T + U waves; long QTc = hypoCa; short QT = hyperCa',
+    'Bradycardia with compromise: atropine 0.5mg IV (up to 3mg); transcutaneous pacing if refractory; transvenous pacing definitive',
+    'EXAM TRAP: Synchronized cardioversion = for arrhythmias WITH pulse; defibrillation (unsynchronized) = pulseless VT/VF',
+  ]},
+  {id:'e2',name:'ACLS — Cardiac Arrest',time:90,yield:'⭐⭐⭐',subs:[
+    'Shockable rhythms: VF and pulseless VT → immediate defibrillation 200J biphasic → 2 min CPR → rhythm check',
+    'Non-shockable rhythms: PEA and asystole → CPR → epinephrine 1mg q3-5min → rhythm check',
+    'After 3rd shock (shockable): amiodarone 300mg IV bolus; then 150mg if still VF/pVT',
+    'Epinephrine 1mg IV/IO: give q3-5min for BOTH shockable (after 3rd shock) and non-shockable (immediately)',
+    'CPR quality: rate 100-120/min, depth 5-6cm, full chest recoil after each compression, minimize interruptions <10s',
+    '4Hs: Hypoxia, Hypovolaemia, Hypo/hyperKalaemia, Hypothermia',
+    '4Ts: Tension pneumothorax, Tamponade (cardiac), Toxins, Thrombosis (PE/coronary)',
+    'Post-ROSC: Targeted Temperature Management 32-36°C × 24h if comatose; avoid hyperoxia SpO₂ 94-98%; PCI if STEMI/suspected cardiac',
+    'EXAM TRAP: Full chest recoil = quality CPR marker (NOT "push hard and fast" alone)',
+  ]},
+  {id:'e3',name:'Shock — All Types + Vasopressors',time:90,yield:'⭐⭐⭐',subs:[
+    'Hypovolemic: cold peripheries, ↓JVP, tachycardia, hypotension; Rx: IV crystalloid → blood products; hemorrhagic = O-neg blood in extremis',
+    'Distributive/Septic: warm peripheries (early), bounding pulse, ↓SVR; Rx: IV crystalloid 30ml/kg + antibiotics + NE vasopressor',
+    'Cardiogenic: cold peripheries, ↑JVP, bibasal crackles, ↑PCWP, ↓CO; Rx: dobutamine (inotrope) + NE for BP; PCI if MI; IABP/ECMO if refractory',
+    'Obstructive: PE→CTPA+anticoag/thrombolysis; tension pneumo→needle decompression; tamponade→pericardiocentesis',
+    'Anaphylactic: IM epinephrine 0.5mg 1:1000 FIRST → antihistamines + steroids + fluids + salbutamol',
+    'Vasopressors: NE (α1+β1) = FIRST LINE septic shock; vasopressin = add-on; dobutamine = inotrope only (cardiogenic); phenylephrine = pure α1 (tachycardic cardiogenic); dopamine = avoid (arrhythmias)',
+    'First sign circulation in ABCDE = capillary refill time (>2 sec = abnormal)',
+    'Norepinephrine extravasation: stop infusion → phentolamine (α-blocker) subcutaneous to affected area',
+    'EXAM TRAP: Cardiogenic shock = ↑PCWP + ↓CO; distributive/septic = ↓SVR + ↓PCWP (warm shock initially)',
+  ]},
+  {id:'e4',name:'Trauma & ATLS',time:90,yield:'⭐⭐⭐',subs:[
+    'Primary survey: Airway (C-spine control) → Breathing → Circulation → Disability (GCS, pupils) → Exposure',
+    'C-spine immobilisation: hard collar + head blocks + long board until cleared by NEXUS or Canadian C-Spine Rule or CT',
+    'eFAST: bilateral lung pleural sliding (absent = pneumothorax), pericardial, hepatorenal, splenorenal, pelvis/pouch of Douglas',
+    'GCS ≤8 → intubate (lost protective airway reflexes)',
+    'Rule of 9s (adult): head 9%, each arm 9%, anterior trunk 18%, posterior trunk 18%, each leg 18%, perineum 1%',
+    'Burns classification: 1st=erythema only; 2nd=blistering/painful (superficial/deep dermal); 3rd=full thickness, leathery, pale/waxy, PAINLESS',
+    'Parkland formula: 4ml × weight(kg) × %BSA burned → 50% in first 8h, 50% in next 16h; use Ringer lactate',
+    'Circumferential burns → escharotomy (for vascular compromise/compartment syndrome in burns)',
+    'Open fracture antibiotics: cefazolin (most injuries, gram+ve); add gentamicin or ceftriaxone if heavily contaminated',
+    'Compartment syndrome: pain out of proportion + pain with PASSIVE STRETCH (earliest sign); fasciotomy definitive; do NOT elevate limb',
+    'Cauda equina: bilateral leg weakness + saddle anaesthesia + urinary retention/incontinence → MRI URGENTLY → emergency neurosurgery',
+    'Head injury with low GCS (≤8) → intubate → CT head → neurosurgery',
+    'EXAM TRAP: IO access site = proximal tibia (anteromedial, avoid growth plate in children) or humeral head',
+  ]},
+  {id:'e5',name:'Chest Pain Approach',time:90,yield:'⭐⭐⭐',subs:[
+    'ACS: troponin (rises 3-6h peak 12-24h), ECG, aspirin 300mg + ticagrelor/clopidogrel + anticoag; STEMI → PCI within 90min',
+    'PE: Wells score → D-dimer if low/moderate probability; CTPA gold standard; massive/haemodynamically unstable → thrombolysis (alteplase)',
+    'Aortic dissection: tearing/ripping pain radiating to back; BP difference >20mmHg between arms; widened mediastinum on CXR; CT aortography; Type A (ascending) → emergency surgery; Type B → IV labetalol/esmolol',
+    'Tension pneumothorax: absent breath sounds + tracheal deviation AWAY from lesion + hypotension; CLINICAL DIAGNOSIS → immediate needle decompression (2nd ICS MCL) → chest drain',
+    'Simple pneumothorax: 2nd ICS MCL aspiration if symptomatic/large; chest drain if fails',
+    'Pericarditis: pleuritic pain, worse lying flat, better sitting forward; pericardial friction rub; saddle-shaped ST elevation ALL leads + PR depression; NSAIDs + colchicine',
+    'Cardiac tamponade: Beck triad (hypotension + raised JVP + muffled heart sounds); pulsus paradoxus; globular heart CXR; ECHOconfirms → pericardiocentesis',
+    'EXAM TRAP: Tamponade = ↑JVP + hypotension; tension pneumothorax = ↑JVP + hypotension + absent breath sounds; distinguish clinically!',
+  ]},
+  {id:'e6',name:'Poisoning & Toxicology',time:90,yield:'⭐⭐⭐',subs:[
+    'Opioid toxidrome: miosis + bradypnea (RR<8) + CNS depression; Naloxone 0.4-2mg IV/IM (repeat if needed, short half-life)',
+    'Salicylate (aspirin): tinnitus, diaphoresis, hyperventilation; early=resp alkalosis; late=metabolic acidosis; Rx=IV NaHCO₃ (alkalinise urine), activated charcoal, dialysis',
+    'Anticholinergic: "hot as hades, dry as a bone, red as a beet, blind as a bat, mad as a hatter"; Rx = physostigmine, benzo for agitation',
+    'Cholinergic/organophosphate: SLUDGE (salivation lacrimation urination defecation GI emesis) + bradycardia/miosis/bronchospasm; Rx = large-dose atropine + pralidoxime early',
+    'Sympathomimetic: tachycardia/HTN/hyperthermia/mydriasis/agitation; cocaine/meth; Rx = benzodiazepines; AVOID beta-blockers in cocaine (unopposed alpha)',
+    'TCA overdose: prolonged QRS >100ms + arrhythmia + anticholinergic + hypotension; Rx = IV sodium bicarbonate (target pH 7.45-7.55)',
+    'Paracetamol (acetaminophen): Rumack-Matthew nomogram; N-acetylcysteine (NAC) antidote; liver transplant if fulminant failure',
+    'Iron overdose: whole bowel irrigation + IV deferoxamine (chelation)',
+    'Alcohol/Wernicke: IV thiamine BEFORE glucose (glucose precipitates Wernicke in thiamine-deficient); Wernicke triad = confusion + ophthalmoplegia + ataxia',
+    'Naloxone MOA: pure competitive opioid receptor antagonist (μ, κ, δ receptors); NO agonist activity; short half-life 30-90min → may need infusion for long-acting opioids',
+  ]},
+  {id:'e7',name:'DKA — Full Management Protocol',time:60,yield:'⭐⭐⭐',subs:[
+    'DKA criteria: glucose >11mmol/L + venous pH <7.3 or bicarb <15 + ketonemia/ketonuria',
+    'ABG pattern: high anion gap metabolic acidosis (Na−Cl−HCO₃ >12) + compensatory respiratory alkalosis (Kussmaul breathing)',
+    'Step 1: IV 0.9% NaCl — 1L over 1h, then guided by fluid deficit (typically 3-6L total)',
+    'Step 2: Potassium — check K BEFORE insulin; K<3.3 → give K first, hold insulin; K 3.5-5.5 → add 20-40mmol K to each litre; NEVER start insulin if K<3.3',
+    'Step 3: Insulin infusion 0.1 unit/kg/hr; when glucose falls to 250mg/dL → add dextrose 5% + reduce insulin to 0.05 U/kg/hr',
+    'Do NOT stop insulin until anion gap is closed (not just when glucose normalizes)',
+    'Resolution: anion gap closed + tolerating oral intake + pH >7.3 → transition to SC insulin (overlap IV and SC by 2h)',
+    'Paediatric DKA: most appropriate first test = ABG + blood glucose; first Rx = 0.9% NaCl bolus; cerebral oedema if neuro change → mannitol',
+    'EXAM TRAP: Insulin drops K → if K already low, fix K first or fatal arrhythmia. Also: do NOT stop insulin early just because glucose normalizes.',
+  ]},
+  {id:'e8',name:'Sepsis — ED Approach',time:60,yield:'⭐⭐⭐',subs:[
+    'Sepsis-3: life-threatening organ dysfunction (SOFA ≥2) from dysregulated response to infection',
+    'qSOFA screen: RR ≥22 + altered GCS (<15) + SBP ≤100; ≥2 = suspect sepsis',
+    'Septic shock: vasopressors needed for MAP ≥65 DESPITE adequate fluid resuscitation + lactate >2',
+    '1-hour bundle: Measure lactate → Blood cultures x2 (before antibiotics!) → Broad-spectrum IV antibiotics → 30ml/kg IV crystalloid if hypotension/lactate ≥4 → vasopressors if no response',
+    'Antibiotic choice: empirical piperacillin-tazobactam (or meropenem); narrow when cultures return; neutropenic = pip-tazo IMMEDIATELY',
+    'Vasopressors: NE first-line MAP ≥65; add vasopressin if NE >0.25mcg/kg/min; hydrocortisone 200mg/day if refractory shock',
+    'Source control: drain abscess, remove infected lines/catheters, surgical consult if needed',
+    'EXAM TRAP: Blood cultures BEFORE antibiotics, but do NOT delay antibiotics to get cultures. Do both rapidly.',
+  ]},
+  {id:'e9',name:'GI Bleed',time:60,yield:'⭐⭐⭐',subs:[
+    'UGIB (above ligament of Treitz): haematemesis (fresh/coffee grounds) + melena; causes: peptic ulcer (#1), varices, Mallory-Weiss',
+    'LGIB: haematochezia; causes: diverticulosis (#1 massive), angiodysplasia, IBD, colorectal Ca, haemorrhoids',
+    'Management: large-bore IV ×2 → crossmatch (FIRST priority if limited blood sample) → IV crystalloid → blood if unstable',
+    'IV PPI infusion: omeprazole/pantoprazole in UGIB; reduces re-bleeding',
+    'Variceal bleed: octreotide + IV antibiotics prophylaxis → urgent endoscopy for banding → TIPS if refractory',
+    'EXAM TRAP: If asked "what to prioritize with limited blood sample" → TYPE AND CROSSMATCH (not CBC, not coagulation)',
+  ]},
+  {id:'e10',name:'Respiratory Distress in ED',time:60,yield:'⭐⭐',subs:[
+    'Anaphylaxis: IM adrenaline 0.5mg (1:1000) into lateral thigh FIRST; then chlorphenamine IV, hydrocortisone IV, IV fluids, salbutamol nebs; observe ≥6h (biphasic reaction risk)',
+    'Acute severe asthma: SABA q20min + ipratropium + IV/PO steroids; severe = IV Mg sulphate 2g over 20min; life-threatening = ICU/intubate',
+    'Acute cardiogenic pulmonary oedema: sit upright + high-flow O₂ or CPAP/BiPAP + IV furosemide + GTN infusion',
+    'COPD exacerbation: controlled O₂ target SpO₂ 88-92% (Venturi mask), SABA+SAMA nebs, prednisolone 30-40mg, antibiotics if infective, NIV/BiPAP if hypercapnic',
+    'EXAM TRAP: COPD = Venturi mask for precise FiO₂ delivery; do NOT give high-flow O₂ (removes hypoxic drive)',
+  ]},
+  {id:'e11',name:'Abdominal Pain Approach',time:45,yield:'⭐⭐',subs:[
+    'Young female with abdominal pain: urine β-HCG FIRST (rule out ectopic pregnancy before anything else)',
+    'Ectopic pregnancy: shoulder tip pain + cervical motion tenderness + positive β-HCG + no IUP on ultrasound → surgical emergency',
+    'SBO: absolute constipation + failure to pass flatus + bilious vomiting + distension; AXR (air-fluid levels centrally); NG tube + IV fluids + surgical review',
+    'Pancreatitis: epigastric pain radiating to back + elevated lipase; causes = gallstones + alcohol; CT for severity; supportive (fluids, analgesia, early feeding)',
+    'AAA rupture: pulsatile abdominal mass + back pain + haemodynamic instability → emergency surgery (do NOT delay for investigations)',
+    'EXAM TRAP: SBO = air-fluid levels centrally on AXR ("stack of coins" pattern); LBO = peripherally (outline of colon)',
+  ]},
+  {id:'e12',name:'Altered Mental Status in ED',time:45,yield:'⭐⭐',subs:[
+    'AEIOU-TIPS: Alcohol/drugs, Epilepsy, Insulin (hypoglycaemia), Overdose, Uraemia; Trauma, Infection, Psychosis, Stroke/Structural',
+    'ALWAYS check glucose FIRST in any AMS patient — hypoglycaemia is most common reversible cause',
+    'Urgent neuroimaging indications: focal neuro signs, severe headache, recent head trauma, immunocompromised, meningism without obvious cause',
+    'Metabolic causes: hyponatraemia (<125 symptomatic), hypercalcaemia, hepatic encephalopathy, uraemia, hypoxia, hypercapnia',
+    'Delirium vs dementia: delirium = ACUTE onset, fluctuating, impaired attention; dementia = chronic, progressive, attention preserved early',
+  ]},
+  {id:'e13',name:'Hypertensive Emergency',time:30,yield:'⭐⭐',subs:[
+    'Hypertensive emergency: BP >180/120 WITH end-organ damage (encephalopathy, MI, stroke, dissection, pulmonary oedema, AKI, eclampsia)',
+    'IV agents: labetalol (safe in pregnancy); nicardipine; nitroprusside (most potent, cyanide risk); GTN (cardiac context)',
+    'BP reduction: reduce MAP by 10-20% in first hour, then up to 25% in first few hours; rapid drop causes stroke/MI',
+    'Aortic dissection: target SBP 100-120 (labetalol first-line); eclampsia: IV Mg + hydralazine/labetalol',
+  ]},
+  {id:'e14',name:'Procedures in EM',time:60,yield:'⭐⭐',subs:[
+    'IO access: proximal tibial (anteromedial, 2cm below tibial tuberosity); same drug doses as IV; confirm with saline flush; EZ-IO drill',
+    'RSI: induction = propofol (avoid in haemodynamic instability) or ketamine (maintains BP); NMB = succinylcholine (CI: hyperK) or rocuronium (1.2mg/kg for RSI)',
+    'Confirm ETT: EtCO₂ waveform (gold standard) + bilateral chest rise; CXR (tip 3-5cm above carina)',
+    'Needle thoracocentesis: 2nd ICS MCL; tension pneumo emergency',
+    'Chest drain: 5th ICS anterior axillary line ("safe triangle"); blunt dissection; connect to water-seal; CXR after',
+    'Cardioversion: sedate first; sync mode for AF (100-200J), flutter (50-100J), SVT (50-100J); do NOT sync for pulseless VT',
+  ]},
+  {id:'e15',name:'Anaphylaxis',time:30,yield:'⭐⭐',subs:[
+    'IM adrenaline 0.5mg (1:1000) lateral thigh FIRST — this is ALWAYS the first step',
+    'Second-line: chlorphenamine IV + hydrocortisone 200mg IV + 500ml-1L IV crystalloid bolus + salbutamol nebs (bronchospasm)',
+    'Airway: position flat + legs elevated (unless vomiting/breathing difficulty); early senior anaesthetics call',
+    'Glucagon for beta-blocked patients not responding to adrenaline',
+    'Observe ≥6h (biphasic reaction 5-20%); discharge with EpiPen + written action plan + allergy referral',
+  ]},
+  {id:'e16',name:'Paediatric Emergency Highlights',time:45,yield:'⭐⭐',added:true,subs:[
+    'Febrile seizure: age 6m-5y; simple = <15min, generalized, once in 24h; diazepam if prolonged >5min; LP if <18m or no obvious source',
+    'Croup: viral (parainfluenza), barking seal-like cough, stridor; dexamethasone 0.15-0.6mg/kg single dose ± nebulised adrenaline if stridor at rest',
+    'Bronchiolitis: RSV, <2y; supportive (O₂ if SpO₂ <90-92%, nasogastric feeds if poor intake); HFNC for moderate-severe; salbutamol NOT effective',
+    'Epiglottitis (emergency): toxic appearance, drooling, tripod sitting, "thumb sign" XR; do NOT examine throat; anaesthetics + ENT; IV ceftriaxone after airway secured',
+    'Burns in children: Lund-Browder chart (not Rule of 9s); calculate Parkland formula using weight; 4ml × kg × %BSA',
+  ]},
+  {id:'e17',name:'Post-Cardiac Arrest Care',time:30,yield:'⭐⭐',added:true,subs:[
+    'Targeted Temperature Management (TTM): 32-36°C × 24h in comatose post-ROSC patients',
+    'Avoid hyperoxia: target SpO₂ 94-98% (O₂ toxicity causes reperfusion injury)',
+    'Treat underlying cause: immediate coronary angiography if STEMI or suspected cardiac cause even if comatose',
+    'Prognostication: absent bilateral N20 SSEP = poor; GCS + brainstem reflexes at ≥72h; CT/MRI',
+  ]},
+],
+icu:[
+  {id:'i1',name:'ARDS — Berlin Criteria + Vent Strategy',time:120,yield:'⭐⭐⭐',subs:[
+    'Berlin criteria (all 4): Acute onset <1 week; Bilateral opacities on CXR/CT not fully explained by effusions/collapse; Not cardiac failure/fluid overload; PaO₂/FiO₂ ≤300 on PEEP ≥5cmH₂O',
+    'Severity: Mild P:F 200-300 (mortality 27%); Moderate P:F 100-200 (32%); Severe P:F <100 (45%)',
+    'Pathophysiology: inflammatory mediators → Type I pneumocyte damage (↑permeability) + Type II pneumocyte damage (↓surfactant) → protein-rich fluid + neutrophils in alveoli → hyaline membranes → V/Q mismatch + intrapulmonary shunting → severe hypoxaemia',
+    'Direct causes: pneumonia (#1, incl COVID-19), aspiration, pulmonary contusion, inhalation injury',
+    'Indirect causes: sepsis (#1 overall), trauma, TRALI, pancreatitis, DIC, hypovolaemic shock',
+    'Differentiate from cardiogenic oedema: ARDS = normal/low PCWP; cardiogenic = high PCWP (>18); ARDS has no cardiomegaly',
+    'Lung-protective ventilation: Vt 6ml/kg IBW (range 4-8), PEEP ≥5 (titrate), Pplat <30cmH₂O',
+    'Permissive hypercapnia: allow PaCO₂ to rise to achieve low Vt; keep pH >7.2; increase RR up to 35; CI: raised ICP, right heart failure',
+    'Proning: if P:F <150 → prone ≥16h/day; improves dorsal alveolar recruitment',
+    'ECMO: veno-venous ECMO if P:F <80-100 refractory to all measures; oxygenates blood outside lungs',
+    'EXAM TRAP: Patient will NOT respond to O₂ therapy alone in ARDS (due to intrapulmonary shunt). Also: Pplat target <30, not >30.',
+  ]},
+  {id:'i2',name:'Mechanical Ventilation & NIV',time:120,yield:'⭐⭐⭐',subs:[
+    'Intubation indications: GCS ≤8, apnoea, refractory hypoxaemia (P:F<100), pH <7.25, RR >30-35, haemodynamic instability, airway obstruction (epiglottitis, Ludwig angina, anaphylaxis)',
+    'RSI drugs: propofol (avoid if haemodynamically unstable) or ketamine (maintains BP); succinylcholine 1.5mg/kg (CI: hyperK) or rocuronium 1.2mg/kg',
+    'Tracheostomy indications: >7-14 days on ventilator, need for secretion clearance, failed weaning, upper airway obstruction, patient comfort',
+    'CPAP: continuous positive pressure; for Type I respiratory failure (cardiogenic pulm oedema, hypoxaemia); prevents de-recruitment; needs conscious patient (GCS >8)',
+    'BiPAP: IPAP + EPAP settings; improves ventilation + oxygenation; for Type II failure (COPD with hypercapnia, neuromuscular)',
+    'NIV indications: COPD exacerbation (PaCO₂ >6kPa and/or pH <7.30); cardiogenic pulm oedema; hypoxaemic respiratory failure; prevent post-extubation failure',
+    'NIV absolute contraindications: GCS <8, cardiorespiratory arrest, inability to protect airway, facial trauma precluding mask fit, uncontrolled vomiting',
+    'Oxygen delivery: NC 1-6L/min (24-44% FiO₂); simple face mask 5-10L (25-60%); Venturi (fixed precise FiO₂, COPD); NRB mask 10-15L (up to 100%); HFNC up to 60L/min (up to 100%)',
+    'EXAM TRAP: CPAP = Type I (oxygenation problem); BiPAP = Type II (ventilation problem = high CO₂). NIV requires conscious, cooperative patient.',
+  ]},
+  {id:'i3',name:'Respiratory Failure — ABG & A-a Gradient',time:90,yield:'⭐⭐⭐',subs:[
+    'Type I (Hypoxaemic): ↓PaO₂ (<60mmHg), normal or ↓PaCO₂; problem = oxygenation; causes: ARDS, pneumonia, pulm oedema, PE, ILD',
+    'Type II (Hypercapnic): ↑PaCO₂ (>45mmHg) ± hypoxaemia; problem = ventilation; causes: COPD, neuromuscular disease (GBS, MG, MND), CNS depression (opioids, stroke), obesity hypoventilation',
+    'ABG interpretation: pH (acidosis <7.35, alkalosis >7.45) → PCO₂ (resp component) → HCO₃ (metabolic component) → compensation',
+    'A-a gradient = PAO₂ – PaO₂; Normal <10-15mmHg (increases with age); Elevated = V/Q mismatch, shunt, or diffusion defect',
+    'Normal A-a gradient + hypoxaemia = hypoventilation only (CNS depression, neuromuscular, chest wall disorder)',
+    'DKA ABG: high anion gap metabolic acidosis + respiratory alkalosis compensation; pattern to memorize',
+    'COPD/asthma ABG: chronic hypercapnia → metabolic compensation (↑HCO₃); acute on chronic = respiratory acidosis + elevated HCO₃',
+    'Respiratory alkalosis from anxiety/hyperventilation: ↑pH, ↓PaCO₂, normal HCO₃',
+    'EXAM TRAP: In ABG interpretation — if pH is low and CO₂ is high = respiratory acidosis (CO₂ is acidic). If pH is low and HCO₃ is low = metabolic acidosis.',
+  ]},
+  {id:'i4',name:'Sepsis & Septic Shock — ICU Management',time:90,yield:'⭐⭐⭐',subs:[
+    'Sepsis-3: organ dysfunction (SOFA ≥2) from dysregulated host response to infection; lactate >2 = tissue hypoperfusion',
+    'Septic shock: MAP <65 requiring vasopressors despite 30ml/kg fluid bolus + lactate >2',
+    'Surviving Sepsis Campaign 1-hour bundle: lactate, cultures x2, broad-spectrum abx, 30ml/kg crystalloid, vasopressors if needed',
+    'Fluid resuscitation: Ringer lactate preferred over normal saline (reduces hyperchloraemic acidosis); avoid colloids',
+    'Vasopressors: NE first-line; add vasopressin 0.03U/min if NE dose high; hydrocortisone 200mg/day if refractory (>0.25mcg/kg/min NE)',
+    'Antibiotic principles: broad-spectrum empirically; cultures BEFORE antibiotics but do NOT delay antibiotics; de-escalate based on cultures within 48-72h',
+    'Source control: drain/debride within 6-12h; remove infected lines; surgical consult if indicated',
+    'Lactate clearance: target >10% every 2h; lactate >4 = severe, high mortality; guides resuscitation endpoint',
+    'EXAM TRAP: Surviving Sepsis 1-hour bundle — all 5 elements must be done within 1 hour. Antibiotics before cultures is WRONG — cultures first, then antibiotics (but do BOTH rapidly).',
+  ]},
+  {id:'i5',name:'Acid-Base Disorders — Full Framework',time:90,yield:'⭐⭐⭐',subs:[
+    'Step 1: pH — acidosis (<7.35) or alkalosis (>7.45)?',
+    'Step 2: Primary disorder — CO₂ ↑ + pH ↓ = respiratory acidosis; CO₂ ↓ + pH ↑ = respiratory alkalosis; HCO₃ ↓ + pH ↓ = metabolic acidosis; HCO₃ ↑ + pH ↑ = metabolic alkalosis',
+    'Step 3: Compensation (does it match expected?)',
+    'Metabolic acidosis: anion gap = Na − (Cl + HCO₃); normal 8-12; RAISED AG causes = MUDPILES (Methanol, Uraemia, DKA, Propylene glycol, Isoniazid/Iron, Lactic acidosis, Ethanol/Ethylene glycol, Salicylates)',
+    'Normal AG metabolic acidosis = HARD mnemonic (Hyperchloraemic, Addisons/Acetazolamide, RTA, Diarrhoea)',
+    'Metabolic alkalosis causes: vomiting (H+ loss), diuretics (K+ loss), hyperaldosteronism, antacids',
+    'Respiratory acidosis: hypoventilation (COPD, opioids, neuromuscular, obesity)',
+    'Respiratory alkalosis: hyperventilation (anxiety, PE, aspirin early, pregnancy, mechanical ventilation)',
+    'Mixed disorders: e.g., DKA with respiratory alkalosis; always check if compensation is appropriate',
+    'EXAM TRAP: DKA = HIGH anion gap metabolic acidosis + resp alkalosis compensation (Kussmaul breathing). Salicylate = resp alkalosis (early) then metabolic acidosis (late).',
+  ]},
+  {id:'i6',name:'AKI & Electrolyte Disorders',time:90,yield:'⭐⭐',subs:[
+    'AKI definition: creatinine rise ≥26.5 µmol/L in 48h, or ≥1.5× baseline in 7 days, or urine output <0.5ml/kg/h for 6h',
+    'Pre-renal AKI: BUN:Cr ratio >20; urine Na <20, FeNa <1%; fractional urea excretion <35%; treat with IV fluids',
+    'Intrinsic renal: ATN (most common; FeNa >2%, granular muddy casts), AIN, GN',
+    'Post-renal: obstruction; U/S for hydronephrosis; catheter or urological intervention',
+    'Hyperkalemia ECG sequence: peaked T → prolonged PR → wide QRS → sine wave → VF; treatment: calcium gluconate (stabilise membrane), insulin+glucose (shift K into cells), salbutamol, NaHCO₃, kayexalate, dialysis',
+    'EXAM TRAP hyperK: Give calcium gluconate FIRST to stabilise cardiac membrane; insulin+glucose shift K but take time',
+    'Hyponatraemia management: SIADH = fluid restriction ± hypertonic saline if symptomatic; avoid rapid correction (osmotic demyelination); max correction 8-10mmol/L per day',
+    'Hypercalcaemia: IV 0.9% NaCl FIRST → bisphosphonates → calcitonin → dialysis if refractory; causes = malignancy (PTHrP), primary hyperparathyroidism, sarcoidosis, multiple myeloma',
+    'Hypermagnesaemia (eclampsia treatment toxicity): IV calcium gluconate is antidote',
+  ]},
+  {id:'i7',name:'Cardiogenic Shock',time:60,yield:'⭐⭐',subs:[
+    'Definition: cardiac pump failure → inadequate CO despite adequate preload',
+    'Haemodynamics: ↓CO/CI, ↑PCWP (>18mmHg), ↑SVR, ↓SvO₂; cold clammy extremities + bibasal crackles + ↑JVP',
+    'Causes: MI (#1), severe cardiomyopathy, acute valvular disease, myocarditis, PE (right heart failure)',
+    'Management: identify + treat underlying cause (PCI for MI); dobutamine (inotrope, ↑contractility); NE if severe hypotension; IABP or Impella or ECMO if refractory',
+    'EXAM TRAP: Dobutamine = inotrope (increases contractility), NOT a vasopressor. Use if EF low but not severely hypotensive. NE = vasopressor (increases afterload/BP).',
+    'PCWP interpretation: cardiogenic oedema >18; ARDS/non-cardiogenic <18',
+  ]},
+  {id:'i8',name:'CXR Interpretation — ICU Context',time:60,yield:'⭐⭐',subs:[
+    'Systematic ABCDE approach: Airway (ETT position, trachea midline) → Bones (rib fractures) → Cardiac silhouette (normal <50% CTR) → Diaphragm (flat = hyperinflation; obliterated = consolidation/effusion) → Everything else (lung fields, lines/tubes)',
+    'ETT position: tip should be 3-5cm above carina (T4-T6 level); too low = right main bronchus intubation',
+    'Pneumothorax: absent lung markings, no vascular shadows to periphery, visible pleural edge',
+    'Consolidation: opacity in a lobe with air bronchograms; no volume loss',
+    'Pleural effusion: blunting of costophrenic angle; meniscus sign; shifting opacity on lateral decubitus',
+    'Pulmonary oedema (cardiogenic): bilateral interstitial opacities + cardiomegaly + perihilar bat-wing pattern + Kerley B lines + effusions',
+    'ARDS pattern: bilateral patchy ground-glass opacities WITHOUT cardiomegaly or pleural effusions',
+    'Aortic dissection: widened mediastinum >8cm; loss of aortic knuckle',
+    'EXAM TRAP: ARDS vs cardiogenic oedema: ARDS = bilateral opacities WITHOUT enlarged heart/effusions; cardiogenic = enlarged heart + effusions present',
+  ]},
+  {id:'i9',name:'ICU Monitoring & Early Warning',time:45,yield:'⭐⭐',subs:[
+    'Monitored parameters: BP (arterial line), ECG, SpO₂, RR, urine output (foley, >0.5ml/kg/h normal), temperature, GCS, EtCO₂ if intubated',
+    'NEWS2 (National Early Warning Score): RR, SpO₂, systolic BP, HR, temperature, consciousness (AVPU); score ≥7 = urgent response',
+    'qSOFA: RR ≥22, altered consciousness, SBP ≤100; 2+ = sepsis screen positive',
+    'When to escalate: NEWS2 ≥7 → immediate ICU; any deterioration not responding to initial management',
+    'Lactate: normal <2mmol/L; 2-4 = tissue hypoperfusion; >4 = severe, high mortality',
+  ]},
+  {id:'i10',name:'Acute Liver Failure',time:45,yield:'⭐',added:true,subs:[
+    'Definition: acute liver dysfunction + coagulopathy (INR ≥1.5) + encephalopathy in patient without pre-existing cirrhosis',
+    'Causes: paracetamol overdose (#1 in UK/West); viral hepatitis (A, B, E); drug reactions; Budd-Chiari; Wilsons (acute decompensation)',
+    'Clinical: jaundice, coagulopathy (PT/INR), hypoglycaemia (liver fails to gluconeogenesis), encephalopathy (asterixis, confusion, coma), cerebral oedema',
+    'Management: treat underlying cause (NAC for paracetamol), vitamin K, FFP for active bleeding, dextrose (hypoglycaemia), lactulose (encephalopathy), ICP monitoring if cerebral oedema, liver transplant assessment',
+    'King College criteria: for urgent liver transplant listing',
+  ]},
+],
+peds:[
+  {id:'p1',name:'Developmental Milestones',time:90,yield:'⭐⭐⭐',subs:[
+    'GROSS MOTOR: 2m=raises head, 4m=rolls over, 6m=sits with support, 9m=crawls, 12-18m=walks, 2y=runs/kicks ball, 3y=climbs stairs (alternating feet)',
+    'SPEECH/LANGUAGE: 2m=coos, 4m=laughs, 6m=babbles, 9m=mama/dada (non-specific), 12m=1+ words, 18m=10+ words, 2y=2-word phrases, 3y=sentences',
+    'FINE MOTOR: 3m=grasp reflex gone (voluntary grasp), 6m=transfers objects, 9m=pincer grasp developing, 12m=crude pincer, 18m=mature pincer (picks up raisins)',
+    'SOCIAL/EMOTIONAL: 2m=social smile (most important 2m milestone), 6m=stranger anxiety begins, 9m=separation anxiety + responds to name, 12m=waves bye-bye, 18m=parallel play, 3y=cooperative play',
+    'RED FLAGS: No social smile by 2m; no babbling by 12m; no single words by 16m; any regression of skills (always abnormal)',
+    'EXAM TRAP: Stranger anxiety = 6m; separation anxiety = 9m. Social smile at 2m = the most tested single milestone.',
+  ]},
+  {id:'p2',name:'Fever in Children — FWS & FUO',time:90,yield:'⭐⭐⭐',subs:[
+    'Most common cause of fever in children: otitis media (treated with amoxicillin-clavulanate)',
+    'Fever Without Source (FWS) causes: MOOPSU = Meningitis, Otitis media, Osteomyelitis, Pneumonia, Septic arthritis, UTI (most common)',
+    'FWS management: <60 days → admit + full septic workup (LP, CBC, blood culture, UA, CXR) + ampicillin + gentamicin; 60-90 days → may/may not admit; >3m → evaluate appearance',
+    'Fever of Unknown Origin: temp >38.3°C on several occasions, duration >3 weeks, no diagnosis after 1 week inpatient investigation',
+    'Paediatric septic workup: LP (meningitis screen), blood culture, urine (SPA or catheter sample), CXR, CBC + CRP',
+    'Febrile child who is "ill-looking" vs "well-appearing" changes management significantly: ill-looking = admit + investigate regardless of age',
+    'EXAM TRAP: In neonates/young infants — even a well-appearing febrile infant <60 days needs FULL workup and admission. Cannot be safely discharged.',
+  ]},
+  {id:'p3',name:'Asthma in Children',time:90,yield:'⭐⭐⭐',subs:[
+    'Definition: chronic airway inflammation + variable reversible expiratory flow limitation + bronchial hyperresponsiveness',
+    'Types of wheeze in children: Episodic (viral) = symptom-free intervals, triggered by viral infection only; Multiple trigger = viral + allergens (true asthma)',
+    'Diagnosis: spirometry gold standard; FEV₁/FVC ratio <0.7 (obstructive); ≥12% improvement in FEV₁ with bronchodilator = reversible obstruction',
+    'Stepwise management: Step 1=SABA PRN; Step 2=add low-dose ICS; Step 3=SABA+ICS+LABA or increase ICS; Step 4=specialist referral',
+    'Acute exacerbation management: SABA (salbutamol) nebs q20min → ipratropium bromide → oral/IV prednisolone → IV Mg sulphate → ICU/intubation',
+    'Acute severe asthma features: SpO₂ <92%, RR >30 (child), HR >130, too breathless to talk; life-threatening = silent chest + cyanosis + GCS drop',
+    'Viral-induced wheeze (episodic): montelukast at onset of viral symptoms + SABA; ICS not routinely used',
+    'Triggers: viral URTI (#1 in children), allergens (dust mites, pollen, pet dander), exercise, cold air, smoke',
+    'EXAM TRAP: Child with wheeze + eczema + allergic rhinitis = atopic triad → true allergic asthma. Use ICS maintenance.',
+  ]},
+  {id:'p4',name:'Kawasaki Disease',time:60,yield:'⭐⭐⭐',subs:[
+    'Mnemonic CRASH & Burn: Conjunctivitis (non-purulent bilateral), Rash (polymorphous, non-vesicular), Adenopathy (unilateral cervical), Strawberry tongue/oral mucositis, Hands/Feet (erythema+oedema → desquamation), BURN = Fever ≥38.5°C ≥5 days',
+    'Diagnosis: fever ≥5 days + ≥4 of the 5 clinical criteria (or <4 with echocardiography showing coronary artery abnormality)',
+    'Risk factors: Asian ethnicity, age <5 years',
+    'Labs: ↑ESR/CRP, ↑WBC, thrombocytosis (in subacute phase), sterile pyuria, mild transaminase elevation',
+    'Treatment: High-dose aspirin (80-100mg/kg/day) + IVIG (2g/kg single dose over 12h); aspirin is switched to low-dose after fever resolves',
+    'Main complication: coronary artery aneurysm (most feared long-term); also myocarditis, pericarditis, arrhythmias',
+    'Long-term: echocardiogram at diagnosis, 2 weeks, 6-8 weeks; aspirin continued until echo normal',
+    'Differentials: scarlet fever, measles, drug reaction (Stevens-Johnson), viral illness',
+    'EXAM TRAP: Long-term medication after Kawasaki = LOW-DOSE aspirin (anti-platelet dose, not anti-inflammatory). IVIG reduces coronary aneurysm risk.',
+  ]},
+  {id:'p5',name:'Childhood Rashes',time:90,yield:'⭐⭐⭐',subs:[
+    'MEASLES: Paramyxovirus; 3 Cs = Cough, Coryza, Conjunctivitis; Koplik spots (white buccal spots = pathognomonic); maculopapular rash face→downward; complications: diarrhoea (most common), otitis media, pneumonia (most common FATAL complication), encephalitis, SSPE (years later)',
+    'SCARLET FEVER: Strep pyogenes; sandpaper rash (trunk, spares palms/soles); strawberry tongue; Pastia lines (rash in skin folds); pharyngitis; Rx=penicillin; complications: rheumatic fever, PSGN',
+    'RUBELLA (German measles): Togavirus; postauricular + occipital lymphadenopathy; maculopapular rash face→down; MILDER than measles; congenital rubella = sensorineural deafness + cataracts + PDA',
+    'ROSEOLA: HHV-6; HIGH fever 3-5 days then RASH APPEARS AFTER fever resolves (trunk first); febrile seizures common',
+    'PARVOVIRUS B19 (fifth disease): slapped cheek rash → lacy reticular body rash; afebrile by time rash appears; aplastic crisis in sickle cell/spherocytosis; hydrops fetalis in pregnancy',
+    'VARICELLA (chickenpox): VZV; crops of lesions in DIFFERENT STAGES simultaneously (macules→papules→vesicles→crusts); intensely pruritic; secondary bacterial infection (impetigo); shingles = reactivation',
+    'IMPETIGO: Staph aureus or Strep pyogenes; non-bullous = honey-coloured crusts; bullous = Staph exotoxin; complication = PSGN (NOT rheumatic fever from skin strep)',
+    'EXAM TRAP: Roseola = fever resolves THEN rash appears (reverse of others). Parvovirus = afebrile at time of rash (fever already gone). Measles = rash DURING fever.',
+  ]},
+  {id:'p6',name:'Vaccination Schedule — UAE',time:45,yield:'⭐⭐⭐',subs:[
+    'Birth: BCG (TB), Hepatitis B (first dose)',
+    '2 months: DTaP-IPV-Hib-HepB (pentavalent), Rotavirus, Pneumococcal conjugate (PCV13)',
+    '4 months: DTaP-IPV-Hib-HepB, Rotavirus, PCV13',
+    '6 months: DTaP-IPV-Hib-HepB, Rotavirus',
+    '12-15 months: MMR, Varicella, PCV13 booster, Hib booster',
+    '18 months: DTaP booster, Hepatitis A',
+    '4-6 years: DTaP-IPV booster, MMR second dose, Varicella second dose',
+    '12 years: HPV vaccine (girls — cervical cancer prevention; boys also in some countries)',
+    'Annual: Influenza vaccine for high-risk groups',
+    'EXAM TRAP: HPV vaccine = 12-year-old girl (adolescent program); 2 doses if <15y at first dose, 3 doses if ≥15y. Also: MMR contraindicated in immunocompromised patients.',
+  ]},
+  {id:'p7',name:'Febrile Seizures',time:45,yield:'⭐⭐⭐',subs:[
+    'Simple febrile seizure: age 6m-5y, duration <15min, generalized (no focal features), single in 24h period, rapid return to normal consciousness',
+    'Complex febrile seizure: focal features OR >15min OR >1 in 24h → investigate further',
+    'Management: ensure airway, positioning (recovery), diazepam PR/IV or midazolam buccal if seizure lasts >5min',
+    'Post-seizure LP: indicated if <18m (signs of meningitis may be absent), signs of meningism, not fully recovered, or prolonged/atypical',
+    'Recurrence risk: ~30% chance of recurrence with future fevers; overall good prognosis; majority do NOT develop epilepsy',
+    'Parent counseling: not dangerous if simple; treat fever with antipyretics; call ambulance if >5min; no prophylactic anticonvulsants recommended',
+    'EXAM TRAP: Febrile seizure ≠ epilepsy. Do NOT start long-term AEDs after a simple febrile seizure. LP in <18m even if apparently simple.',
+  ]},
+  {id:'p8',name:'Congenital Heart Disease',time:90,yield:'⭐⭐',subs:[
+    'Acyanotic (L→R shunt initially): VSD (most common CHD overall), ASD, PDA',
+    'Cyanotic (R→L shunt): Tetralogy of Fallot (TOF) = most common cyanotic CHD; TGA, Tricuspid atresia, Pulmonary atresia, Total anomalous pulmonary venous return',
+    'TOF: 4 components = VSD + right ventricular outflow obstruction + RVH + overriding aorta; hypercyanotic "TET spells" = squatting (increases SVR → reduces R→L shunt); treat spell = knee-chest position + O₂ + morphine + IV propranolol',
+    'VSD: holosystolic murmur at left sternal border; most common CHD; may close spontaneously',
+    'ASD: fixed split S2; flow murmur at pulmonary area; may present as adult (Eisenmenger syndrome later)',
+    'PDA: continuous machinery murmur; closes with indomethacin (inhibits prostaglandins); KEEP OPEN with prostaglandins in duct-dependent lesions',
+    'Transposition of Great Arteries (TGA): aorta from RV, PA from LV; INCOMPATIBLE WITH LIFE without mixing (VSD, ASD, PDA); prostaglandins to maintain PDA until surgery',
+    'Coarctation of aorta: differential blood pressure (higher in arms than legs); radio-femoral delay; rib notching on CXR; treat with PGE₁ in neonates',
+    'Eisenmenger syndrome: L→R shunt → pulmonary hypertension → reversal to R→L shunt → cyanosis; irreversible; no surgical repair possible',
+    'EXAM TRAP: Squatting in TOF = increases SVR → forces blood through lungs → LESS cyanosis. Infant with TGA must have MIXING to survive → use prostaglandins.',
+  ]},
+  {id:'p9',name:'DKA in Children',time:60,yield:'⭐⭐⭐',subs:[
+    'New-onset T1DM most common presentation in children; polyuria, polydipsia, weight loss, vomiting, lethargy, Kussmaul breathing',
+    'Most appropriate first test: blood glucose + ABG (to confirm DKA and assess severity)',
+    'First management step: 0.9% NaCl IV bolus (same as adult DKA)',
+    'Potassium: check before insulin; add to fluids; monitor closely',
+    'Insulin: 0.1 unit/kg/hr after 1-2h of fluid resuscitation',
+    'Most feared complication: CEREBRAL OEDEMA; risk factors = young age, rapid fluid/glucose correction, high serum osmolality; presents as neurological deterioration; Rx = IV mannitol 0.5-1g/kg or hypertonic saline',
+    'Monitoring: neurological observations hourly; glucose q1h; electrolytes q2-4h',
+    'EXAM TRAP: Cerebral oedema is specific to paediatric DKA (rare in adults). Suspect if GCS drops during treatment. Mannitol immediately.',
+  ]},
+  {id:'p10',name:'Cystic Fibrosis',time:60,yield:'⭐⭐',subs:[
+    'CFTR gene mutation (chromosome 7): autosomal recessive; ΔF508 most common; defective Cl⁻ channels → thick secretions',
+    'Respiratory: chronic cough, recurrent pneumonia (Pseudomonas in adolescents, Staph in young children), bronchiectasis, nasal polyps',
+    'GI: meconium ileus (neonatal — CF until proven otherwise), pancreatic exocrine insufficiency, steatorrhoea, failure to thrive, rectal prolapse',
+    'Other: salty sweat (diagnostic), digital clubbing, male infertility (absent vas deferens), portal hypertension (late)',
+    'Diagnosis: sweat chloride test >60mmol/L = gold standard; CFTR mutation analysis; neonatal screening via immunoreactive trypsinogen (IRT)',
+    'Management: chest physiotherapy + dornase alfa (DNase, thins secretions) + hypertonic saline; CFTR modulators (ivacaftor, lumacaftor); antibiotics for infections; pancreatic enzymes + fat-soluble vitamins (ADEK)',
+    'Main determinant of prognosis: severity of pulmonary disease; bronchiectasis → respiratory failure → death',
+    'EXAM TRAP: Meconium ileus at birth = CF until proven otherwise. Sweat chloride >60mmol/L = gold standard diagnosis (not genetic testing).',
+  ]},
+  {id:'p11',name:'Nephrotic Syndrome',time:60,yield:'⭐⭐',subs:[
+    'Definition: proteinuria >3.5g/day (children >40mg/m²/h) + hypoalbuminaemia + oedema + hyperlipidaemia/lipiduria',
+    'Most common cause in children: minimal change disease (MCD); responds to steroids; caused by T-cell dysfunction',
+    'Clinical: periorbital oedema (first sign in mornings), dependent oedema (legs/scrotum), ascites, pleural effusions',
+    'Complications: infection (Strep pneumoniae — lost immunoglobulins), VTE (lost antithrombin III), hyperlipidaemia, acute renal impairment',
+    'Investigations: urine protein:creatinine ratio, 24h urine protein, serum albumin, cholesterol, renal biopsy (not routinely in children if typical presentation)',
+    'Management: oral prednisolone (first-line); cyclophosphamide or mycophenolate if steroid-dependent/resistant; salt restriction + diuretics for oedema',
+    'Vaccinations: pneumococcal vaccine before steroids (lost Ab)',
+    'EXAM TRAP: MCD is steroid-sensitive (85% respond). Membranous nephropathy = most common cause in ADULTS. Frothy urine = proteinuria.',
+  ]},
+  {id:'p12',name:'Failure to Thrive (FTT)',time:45,yield:'⭐⭐',subs:[
+    'Definition: weight-for-age below 5th percentile OR significant drop ≥2 centiles on growth chart (using WHO chart <2y, CDC chart ≥2y)',
+    'Most common cause: inadequate caloric intake (behavioural/psychosocial)',
+    'Organic causes: malabsorption (CF, coeliac, short gut), increased expenditure (CHF, renal failure, metabolic disease), decreased intake (cleft palate, CNS dysfunction)',
+    'Assessment: detailed feeding history + dietary recall + feeding observation; anthropometric z-scores; growth chart review',
+    'Routine labs only if severe/specific symptoms present (not routine in all FTT)',
+    'Management: dietary counselling + caloric supplementation first; MDT if severe (nutritionist, psychologist, social work); hospitalisation rarely needed',
+    'Long-term consequences of untreated FTT: short stature, cognitive deficits, impaired immunity',
+    'Special considerations: consider child neglect/abuse; consider eating disorder in older children',
+  ]},
+  {id:'p13',name:'Growth & Puberty Disorders',time:60,yield:'⭐⭐',subs:[
+    'Constitutional delay of growth: most common cause of short stature in children; family history of delayed puberty; bone age < chronological age; ultimate height normal; reassure',
+    'GH deficiency: short stature + slow growth velocity + delayed bone age; central obesity; IGF-1 low; GH stimulation test; Rx = recombinant GH',
+    'Target height: boys = (father height + mother height + 13cm) / 2; girls = (father height + mother height - 13cm) / 2 (± 8.5cm)',
+    'Precocious puberty: girls <8y or boys <9y; central (GnRH-dependent, LH/FSH elevated) vs peripheral (GnRH-independent, LH/FSH suppressed)',
+    'Central precocious puberty: pulsatile GnRH → ↑LH/FSH; brain MRI to exclude CNS cause; Rx = GnRH agonist (leuprolide)',
+    'Delayed puberty: girls >13y no thelarche; boys >14y no testicular enlargement; bone age most useful initial test',
+    'EXAM TRAP: Constitutional delay of growth = MOST COMMON cause of short stature. Bone age = best initial test to assess growth potential. Obese child with HTN + acanthosis nigricans = insulin resistance → refer endocrine.',
+  ]},
+  {id:'p14',name:'Muscular Dystrophy (DMD)',time:45,yield:'⭐⭐',subs:[
+    'Duchenne: X-linked recessive; dystrophin gene mutation; presents age 3-5y with proximal muscle weakness',
+    'Clinical: waddling gait, Gowers sign (uses arms to push off thighs when rising), calf pseudohypertrophy, proximal weakness first',
+    'First investigation: CK levels (massively elevated, >10× normal) — this is the EXAM ANSWER',
+    'Confirmation: muscle biopsy (absent dystrophin) + genetic testing',
+    'Complications: cardiomyopathy (all affected by teens), respiratory failure (nocturnal hypoventilation → BiPAP)',
+    'Management: prednisolone (slows progression); physiotherapy; ACE inhibitors (cardiomyopathy); BiPAP for respiratory support',
+    'EXAM TRAP: First diagnostic test for suspected DMD = CK levels (NOT EMG, NOT biopsy initially). EMG is used to confirm motor unit disease pattern.',
+  ]},
+  {id:'p15',name:'Neonatal Emergencies',time:60,yield:'⭐⭐',subs:[
+    'Congenital Diaphragmatic Hernia (CDH): scaphoid abdomen + respiratory distress at birth + bowel sounds in chest; XR = bowel in thorax; do NOT bag-mask ventilate (distends bowel); immediate ET intubation; NG tube; surgical repair',
+    'Respiratory Distress Syndrome (RDS/HMD): preterm infant, surfactant deficiency; ET intubation for surfactant administration',
+    'Meconium aspiration: post-dates infant; meconium staining + respiratory distress; suction, O₂, surfactant if severe',
+    'Laryngomalacia: inspiratory stridor in young infants; worse when lying flat or feeding; usually resolves by 18-24m; most common cause of chronic stridor in infants',
+    'Pyloric stenosis: 2-8 weeks, first-born male; projectile non-bilious vomiting; palpable olive-shaped mass RUQ; hypochloraemic hypokalaemic metabolic alkalosis; ultrasound confirms; Ramstedt pyloromyotomy',
+    'Intussusception: 3m-3y (peak 6-12m); intermittent colicky pain + "currant jelly" stools + sausage-shaped mass RUQ; ultrasound; air enema reduction (non-operative if stable)',
+    'EXAM TRAP: CDH = do NOT bag-mask ventilate (inflates bowel in chest, worsens compression). ET intubation immediately.',
+  ]},
+  {id:'p16',name:'GBS in Children + Neuromuscular Diseases',time:45,yield:'⭐⭐',subs:[
+    'GBS in children: ascending flaccid paralysis + areflexia; often post-infectious (Campylobacter, CMV, EBV); CSF = high protein + normal/low WBC (albuminocytological dissociation)',
+    'Confirm GBS: EMG (slow conduction velocity = demyelinating) and CSF; GBS diagnosis mainly clinical',
+    'Treatment: IVIG (2g/kg over 5 days) or plasmapheresis; respiratory monitoring critical (FVC)',
+    'SMA (Spinal Muscular Atrophy): autosomal recessive, SMN1 gene; generalised hypotonia + flaccid weakness + areflexia at birth; tongue fasciculations; "frog leg" posture; alert infant (cognition spared)',
+    'SMA type I (Werdnig-Hoffmann): most severe; presents at birth/infancy; never sit or stand; respiratory failure',
+    'Treatment SMA: nusinersen (intrathecal), onasemnogene abeparvovec (gene therapy), risdiplam',
+    'EXAM TRAP: SMA infant = hypotonic ("floppy baby") but ALERT AND INTERACTIVE (cognition intact). Contrast with Down syndrome (also floppy but different features).',
+  ]},
+  {id:'p17',name:'Paediatric Oncology — ALL',time:45,yield:'⭐⭐',subs:[
+    'ALL most common childhood cancer; peak age 2-5y; Down syndrome risk factor',
+    'Presentation: fever, bone pain (lytic lesions), pallor, hepatosplenomegaly, lymphadenopathy, easy bruising/bleeding',
+    'Labs: anaemia + thrombocytopenia + variable WBC (may have lymphoblasts on film); TdT+ CD10+ CD19+',
+    'Diagnosis: bone marrow biopsy (≥20% lymphoblasts = diagnostic)',
+    'Treatment: induction (vincristine + steroids + L-asparaginase) → CNS prophylaxis (intrathecal chemo) → maintenance; overall survival >85% in children',
+    'Child on chemo exposed to chickenpox (VZV): if asymptomatic + immunocompromised → VZIG (varicella zoster immunoglobulin) prophylaxis; if symptomatic → IV acyclovir',
+    'Febrile neutropenia in oncology child: ANC <0.5 + fever → IV pip-tazo IMMEDIATELY (same as adults)',
+    'EXAM TRAP: Child on chemo + VZV exposure + asymptomatic = VZIG (not vaccine). Child on chemo + fever = IV antibiotics immediately, no waiting.',
+  ]},
+  {id:'p18',name:'Obesity in Children',time:30,yield:'⭐⭐',subs:[
+    'Definition: BMI >95th percentile for age and sex; overweight = 85th-95th percentile',
+    'Risk factors: parental obesity, sedentary lifestyle, processed food diet, low socioeconomic status, sleep deprivation',
+    'Complications: hypertension, T2DM (acanthosis nigricans = sign of insulin resistance), dyslipidaemia, non-alcoholic fatty liver disease, OSA, psychological (bullying, depression), orthopaedic (Blount disease, slipped femoral epiphysis)',
+    'Endocrinology referral: acanthosis nigricans (insulin resistance), abnormal thyroid function, signs of Cushing syndrome, or growth concerns',
+    'Investigations: fasting glucose/HbA1c, lipid panel, LFTs, TFTs, BP',
+    'Management: lifestyle modification (diet + activity counselling) + family involvement; medications (metformin) if T2DM; referral to paediatric dietitian',
+  ]},
+  {id:'p19',name:'Allergic Rhinitis + Chronic Respiratory',time:30,yield:'⭐',subs:[
+    'Allergic rhinitis: IgE-mediated, perennial (dust mites) or seasonal (pollen); nasal congestion + clear rhinorrhea + sneezing + itchy eyes',
+    'Physical signs: allergic salute (nose rubbing), allergic shiner (dark infraorbital circles), Dennie-Morgan lines, nasal crease, receded lower jaw (mouth breather)',
+    'Treatment: allergen avoidance; intranasal corticosteroids (fluticasone = first-line maintenance); oral antihistamines; leukotriene antagonists (montelukast)',
+    'Chronic lung disease of prematurity (BPD): preterm <32 weeks + prolonged mechanical ventilation + O₂; persistent O₂ requirement >28 days; palivizumab (RSV prophylaxis)',
+    'Unilateral nasal obstruction + blood-tinged discharge in child: consider foreign body (most common) vs nasal mass',
+  ]},
+  {id:'p20',name:'Autism Spectrum & Developmental Concerns',time:30,yield:'⭐',added:true,subs:[
+    'ASD features: impaired social interaction + impaired communication + restricted/repetitive behaviours/interests',
+    'Red flags: no pointing or waving by 12m; no babbling by 12m; no single words by 16m; no 2-word phrases by 24m; any regression',
+    'Child throwing tantrums: if concerning for autism = refer for autism screening; if developmentally expected = reassure + parent guidance',
+    'Screening tools: M-CHAT (Modified Checklist for Autism in Toddlers) at 18m and 24m well-child visits',
+    'Management: early intensive behavioural therapy (ABA); speech therapy; OT; structured educational environment; no proven pharmacological treatment for core features',
+    'Intellectual disability: IQ <70 + functional impairment; assess for genetic cause (Down syndrome, fragile X)',
+  ]},
+],
+heme:[
+  {id:'h1',name:'Anemias — Complete Workup & All Types',time:180,yield:'⭐⭐⭐',subs:[
+    'IRON DEFICIENCY: most common; low ferritin (best indicator), low iron, HIGH TIBC, HIGH RDW; microcytic hypochromic; Plummer-Vinson syndrome (IDA + dysphagia + oesophageal webs); Rx = ferrous sulphate (SE: constipation, black stools, nausea)',
+    'SIDEROBLASTIC: B6 deficiency (isoniazid), lead poisoning; ringed sideroblasts on Prussian blue stain; HIGH ferritin, HIGH iron, LOW TIBC; MCV variable',
+    'ANEMIA OF CHRONIC DISEASE (AoCD): hepcidin ↑ → reduced gut absorption + increased storage; LOW iron + HIGH ferritin + LOW TIBC; normocytic or mild microcytic; causes = CKD, autoimmune, malignancy, chronic infection',
+    'THALASSEMIA: LOW RDW (uniform small cells), HIGH RBC count; alpha-thalassemia (1-2 gene deletions = mild; 3 = HbH; 4 = hydrops fetalis); beta-thalassemia major = frontal bossing + maxillary hyperplasia + chipmunk facies + hair-on-end skull XR; Rx = transfusion + iron chelation (desferrioxamine)',
+    'B12 DEFICIENCY: pernicious anaemia (anti-intrinsic factor/anti-parietal cell Ab); elevated methylmalonic acid + homocysteine (both elevated distinguishes from folate); peripheral neuropathy + subacute combined degeneration; hypersegmented neutrophils on film; Rx = IM hydroxycobalamin',
+    'FOLATE DEFICIENCY: elevated homocysteine only (not methylmalonic acid); alcoholism, methotrexate, phenytoin; hypersegmented neutrophils; Rx = oral folic acid',
+    'APLASTIC ANAEMIA: pancytopenia + hypocellular bone marrow; causes = autoimmune/idiopathic, drugs (chloramphenicol), viral (EBV, HIV, parvovirus B19 in immunocompromised); Rx = BMT or immunosuppression (ATG + cyclosporine)',
+    'G6PD DEFICIENCY: X-linked; Heinz bodies + bite cells; episodic haemolytic anaemia with oxidative stress; triggers = DAPSONE, Sulfonamides, Primaquine, Quinine, Fluoroquinolones, Nitrofurantoin, fava beans, infection',
+    'HEREDITARY SPHEROCYTOSIS: spectrin/ankyrin defect; Coombs NEGATIVE; extravascular haemolysis; splenomegaly; diagnostic = osmotic fragility test; Rx = folic acid + splenectomy (pre-op vaccines: pneumo, Hib, meningococcal)',
+    'PNH: PIGA gene defect → absent CD55/CD59 → uncontrolled complement; morning cola-coloured urine; pancytopenia + thrombosis; flow cytometry; eculizumab',
+    'SICKLE CELL: HbS autosomal recessive; triggers = hypoxia + dehydration + acidosis + cold; acute chest syndrome (fever + chest pain + hypoxia + new CXR infiltrate) = #1 cause of death; Rx acute = O₂ + IV fluids + analgesia + blood transfusion; long-term = hydroxyurea + folic acid + penicillin; why not until 6m = fetal Hb protective',
+    'EXAM TRAP: RDW HIGH = IDA (heterogeneous cell sizes). RDW NORMAL = thalassemia or AoCD. Ferritin is an ACUTE PHASE REACTANT — can be falsely normal/elevated in infection/inflammation even if iron-deficient.',
+  ]},
+  {id:'h2',name:'Leukemias — ALL/AML/CML/CLL + Markers',time:150,yield:'⭐⭐⭐',subs:[
+    'DIAGNOSIS OF ACUTE LEUKAEMIA: ≥20% blasts in bone marrow or peripheral blood',
+    'ALL: children (~4y), Down syndrome; TdT+, CD10+, CD19+; bone pain, lymphadenopathy, hepatosplenomegaly; good prognosis t(12;21); BAD prognosis t(9;22) Philadelphia; CNS prophylaxis = intrathecal chemo; ALL/AML induction then maintenance',
+    'AML: adults (~65y); Auer rods + MPO+; anemia + infections + bleeding; M3 subtype (APML) = Auer rods + DIC → Rx with ATRA (all-trans retinoic acid = vitamin A); Rx = 7+3 chemo (cytarabine + anthracycline)',
+    'CML: adults ~50y; PHILADELPHIA CHROMOSOME t(9;22) → BCR-ABL; huge WBC (>100k with FULL SPECTRUM neutrophils, basophils, eosinophils); B symptoms; Rx = IMATINIB (tyrosine kinase inhibitor, oral); blast crisis = transforms to acute leukaemia',
+    'CLL: elderly; CD5+ CD20+ CD23+; SMUDGE CELLS on blood film; B symptoms; often asymptomatic diagnosis; watch-and-wait if asymptomatic; ibrutinib/chlorambucil if symptomatic',
+    'Lymphoma vs leukaemia distinction on blood film: acute = blast cells (immature); chronic = mature cells with FULL spectrum',
+    'HODGKIN: CD15+ CD30+; Reed-Sternberg cells ("owl eye" binucleate cells); bimodal age; alcohol-induced lymph node pain = PATHOGNOMONIC; mediastinal mass; ABVD chemotherapy',
+    'DLBCL: CD20+; most common NHL; aggressive; R-CHOP treatment',
+    'BURKITT: CD20+, c-MYC t(8;14); EBV-related; starry-sky histology; treat with intensive chemo',
+    'FOLLICULAR: CD20+, BCL-2+, t(14;18); indolent; watch-wait or rituximab',
+    'EXAM TRAP: CML Philadelphia chromosome = t(9;22). ALL with Philadelphia chromosome also exists — treated with imatinib PLUS chemotherapy (worse prognosis than CML). B symptoms = fever >38°C + night sweats + >10% weight loss.',
+  ]},
+  {id:'h3',name:'ITP / TTP / HUS / DIC',time:120,yield:'⭐⭐⭐',subs:[
+    'ITP: anti-GPIIb-IIIa antibodies → immune-mediated platelet destruction; isolated thrombocytopenia; follows viral infection, SLE, HIV, Hep C; dx of EXCLUSION; Rx = prednisolone → IVIG → rituximab → splenectomy',
+    'TTP (Thrombotic Thrombocytopenic Purpura): anti-ADAMTS13 antibodies → vWF accumulation → platelet thrombi; PENTAD = FAT RN (Fever, Anemia [MAHA], Thrombocytopenia, Renal failure, Neurological symptoms); schistocytes on film; TREATMENT = PLASMA EXCHANGE (first-line!) + prednisolone; DO NOT give platelets (worsens)',
+    'HUS: Shiga toxin E. coli O157:H7; post-gastroenteritis in children; MAHA + thrombocytopenia + MORE SEVERE RENAL FAILURE than TTP; LESS neuro; avoid antibiotics and antidiarrheals (↑ toxin release); supportive (dialysis)',
+    'DIC: widespread clotting activation; ALL COAG TESTS ABNORMAL: ↑PT + ↑PTT + ↓platelets + ↑D-dimer + ↓fibrinogen; schistocytes; causes = sepsis + trauma + APML + obstetric emergencies; Rx = treat underlying cause + FFP/cryoprecipitate',
+    'COAGULATION: extrinsic pathway = TF + F7 → measured by PT/INR; intrinsic pathway = F12→11→9→8 → measured by PTT; final common pathway = F10 → thrombin → fibrin',
+    'HEMOPHILIA A: factor VIII deficiency (X-linked recessive); prolonged PTT + normal PT; hemarthrosis; Rx = factor VIII concentrate; DDAVP for mild (increases vWF + VIII); mixing study CORRECTS prolonged PTT (vs acquired inhibitor)',
+    'HEMOPHILIA B: factor IX deficiency; same presentation; Rx = factor IX concentrate',
+    'vWD: MOST COMMON bleeding disorder; mucosal bleeds (epistaxis, menorrhagia); prolonged PTT (vWF carries factor VIII); Rx = DDAVP (mild) or vWF concentrate; types I/II/III',
+    'VIT K DEFICIENCY: factors 2,7,9,10; PT/INR prolongs FIRST (F7 shortest half-life); neonates (sterile gut) + antibiotics + warfarin + malabsorption; Rx = vitamin K; emergency = FFP or PCC',
+    'EXAM TRAP: TTP treatment = PLASMA EXCHANGE (not just FFP, not platelets). TTP vs HUS: HUS has MORE renal failure, LESS neurological features, and occurs in CHILDREN after diarrhoea.',
+  ]},
+  {id:'h4',name:'Oncological Emergencies',time:120,yield:'⭐⭐⭐',subs:[
+    'TUMOR LYSIS SYNDROME: post-chemotherapy (B-cell lymphoma most common); hyperkalemia + hyperuricemia + hyperphosphatemia + hypocalcemia + AKI; Rx = aggressive IV fluids + rasburicase (urate oxidase) + allopurinol (prophylaxis) + insulin+glucose for K + monitor electrolytes',
+    'HYPERCALCEMIA OF MALIGNANCY: PTHrP most common mechanism (squamous cell lung, renal cell Ca); symptoms = BONES stones groans PSYCHIC MOANS; immediate Rx = IV 0.9% NaCl FIRST (rehydration) → then bisphosphonates → calcitonin → dialysis if refractory',
+    'NEUTROPENIC SEPSIS (febrile neutropenia): ANC <0.5 + temp >38.3°C in chemo patient; IV PIPERACILLIN-TAZOBACTAM IMMEDIATELY without waiting for culture results; add caspofungin/antifungal if >5 days fever or immunocompromised; DO NOT delay for cultures (unlike regular sepsis — here just give antibiotics)',
+    'SVC SYNDROME: facial/neck/arm swelling + plethora + dilated neck veins; Pemberton sign = facial plethora when raising arms above head; cause = NSCLC or lymphoma; CT chest; Rx = corticosteroids + chemotherapy/RT ± stenting',
+    'SPINAL CORD COMPRESSION: back pain + bilateral weakness + sensory level + sphincter dysfunction; EMERGENCY MRI SPINE; high-dose dexamethasone IMMEDIATELY; urgent RT or surgery; do NOT delay imaging',
+    'EXAM TRAP: Hypercalcemia = IV SALINE first (NOT bisphosphonates first, not calcitonin first). Neutropenic fever = antibiotics IMMEDIATELY (do not wait for cultures unlike standard sepsis guidance).',
+  ]},
+  {id:'h5',name:'Multiple Myeloma',time:90,yield:'⭐⭐⭐',subs:[
+    'CRAB criteria: HyperCalcaemia + Renal failure + Anaemia (normocytic) + Bone pain/lytic "punched-out" lesions',
+    'Most common immunoglobulin: IgG (most common) > IgA > light chain only',
+    'Bence Jones protein = free light chains in urine; M-spike on SPEP; CD38+ CD138+; bone marrow biopsy >10% plasmacytosis = diagnostic',
+    'Blood film: Rouleaux formation (RBCs stacking like coins due to excess protein)',
+    'Complications: hypercalcaemia, hyperviscosity syndrome (blurred vision, headache, bleeding), AKI (light chain cast nephropathy), infections (immunoparesis — one Ig overexpressed, others suppressed), pathological fractures, spinal cord compression',
+    'Treatment: VCD/VRD (bortezomib-based) + autologous SCT if eligible; bisphosphonates for bone disease (reduce fractures)',
+    'Differentiate Waldenström macroglobulinaemia: IgM spike + hyperviscosity; NO CRAB features; CD19+ CD20+',
+    'EXAM TRAP: Multiple myeloma patient at risk of infections because of IMMUNOPARESIS — overexpression of one Ig class leads to underexpression of all others. Not just bone marrow failure.',
+  ]},
+  {id:'h6',name:'Lymphoma — Hodgkin vs NHL',time:90,yield:'⭐⭐',subs:[
+    'HODGKIN: bimodal (20s + >55); CD15+ CD30+; Reed-Sternberg cells (binucleate "owl eye"); ALCOHOL-INDUCED LYMPH NODE PAIN = pathognomonic for Hodgkin; mediastinal mass on CXR; treatment: ABVD (Adriamycin, Bleomycin, Vinblastine, Dacarbazine)',
+    'B SYMPTOMS (both): fever >38°C + drenching night sweats + >10% weight loss; indicates advanced stage',
+    'LYMPHADENOPATHY ASSESSMENT: mobility (fixed = carcinoma; mobile = reactive or lymphoma); consistency (rubbery = lymphoma; hard = carcinoma; soft = reactive); tenderness (tender = reactive; non-tender = lymphoma/carcinoma)',
+    'WORKUP: CXR first → CT chest/abdomen/pelvis → PET-CT for staging; excisional biopsy preferred over FNA for Hodgkin',
+    'Ann Arbor staging: I=single node group; II=multiple groups same side diaphragm; III=both sides; IV=extranodal; +A (no B symptoms) or +B (B symptoms)',
+    'NHL types: DLBCL (most common NHL, aggressive, CD20+, R-CHOP); Follicular (indolent, BCL-2+, watch-wait); Burkitt (most aggressive, c-MYC, t(8;14), EBV-related, HIV-related)',
+    'EXAM TRAP: SVC obstruction from mediastinal lymphadenopathy = facial oedema + arm oedema + dilated chest veins. This can also occur with Pemberton sign.',
+  ]},
+  {id:'h7',name:'Transfusion Reactions',time:60,yield:'⭐⭐⭐',subs:[
+    'ACUTE HAEMOLYTIC (ABO incompatibility): within 30 min; flank pain + fever + haemoglobinuria + hypotension; STOP TRANSFUSION FIRST; IV fluids + monitor urine output',
+    'IgA DEFICIENCY ANAPHYLAXIS: within seconds; anti-IgA antibodies; anaphylaxis; use washed/IgA-deficient blood',
+    'FEBRILE NON-HAEMOLYTIC: within 6h; fever + rigors from cytokine release (most common reaction); premedicate with paracetamol',
+    'TRALI: within 6h; non-cardiogenic pulmonary oedema (bilateral opacities, fever, hypotension); supportive',
+    'TACO: transfusion-associated circulatory overload; cardiogenic pulmonary oedema; furosemide + slow rate',
+    'TIMING GUIDE: 30 sec = IgA anaphylaxis; 30 min = ABO haemolytic; 30 hours = febrile (cytokine release)',
+    'Emergency blood: O-negative = universal donor RBC; O-positive acceptable in males/post-menopausal females in extremis',
+    'Massive transfusion: ≥10 units RBC or 1 blood volume in 24h; 1:1:1 ratio (RBC:FFP:platelets) to prevent dilutional coagulopathy',
+    'EXAM TRAP: First step for ANY transfusion reaction = STOP THE TRANSFUSION. Then identify the type and treat accordingly.',
+  ]},
+  {id:'h8',name:'Thrombophilia & VTE',time:60,yield:'⭐⭐',subs:[
+    "Virchow's triad: Stasis + Endothelial damage + Hypercoagulability",
+    'Factor V Leiden: MOST COMMON inherited thrombophilia; Factor V not inactivated by APC; genetic testing',
+    'Antithrombin III deficiency: HEPARIN RESISTANCE (PTT does not rise despite heparin → suspect this); inherited or acquired (nephrotic syndrome, liver disease)',
+    'Protein C deficiency: WARFARIN SKIN NECROSIS on initiation (warfarin inhibits Protein C first → transient hypercoagulable state)',
+    'APS (antiphospholipid syndrome): anti-cardiolipin + lupus anticoagulant + anti-β2-glycoprotein; prolonged PTT (paradoxically thrombotic not haemorrhagic); recurrent pregnancy loss; false positive VDRL; Rx = anticoagulation',
+    'Acquired thrombophilia: malignancy (unprovoked VTE → rule out cancer), pregnancy, OCP/HRT, immobility, nephrotic syndrome (lose ATIII in urine), smoking',
+    'EXAM TRAP: APS has prolonged PTT but patients CLOT (not bleed). The lupus anticoagulant is a misnomer.',
+  ]},
+  {id:'h9',name:'Palliative Care & Medical Ethics',time:60,yield:'⭐⭐⭐',subs:[
+    'AND (Allowing Natural Death): patient decision only; ONLY THE PATIENT CAN REVOKE AND (not family, not doctors); family cannot override DNR/AND',
+    'Emergency consent (UAE): patient found unconscious + no family = 3 doctors sign (treating doctor + 2 other consultants) to proceed',
+    'DNR: means no resuscitation attempt ONLY; ALL OTHER treatments continue (fluids, antibiotics, comfort measures)',
+    'Breaking bad news — SPIKES: Setting, Perception (what do they know?), Invitation (how much do they want to know?), Knowledge (deliver), Empathy (respond to emotion), Summary',
+    'When patient cries/emotional: CORRECT ANSWER = empathic acknowledgement ("This must be very hard for you"); WRONG ANSWERS = continuing clinical information; reading from report; giving prognosis without being asked',
+    'Morphine side effects: constipation (#1, give laxatives prophylactically), nausea, miosis, addiction, respiratory depression',
+    'Opioid toxicity: TRIAD = miosis + RR <8 + CNS depression; ANTIDOTE = naloxone (competitive opioid antagonist); repeat doses needed (short half-life 30-90min)',
+    'End-of-life patient with ascites/complications: MDT + family meeting + goals of care discussion = CORRECT ANSWER (not CT + surgery, not NG tube, not transfer)',
+    'EXAM TRAP: Only the patient can revoke AND. No family member. No consultant. No court. Only the competent patient.',
+  ]},
+  {id:'h10',name:'Specific Cancers & Tumor Markers',time:60,yield:'⭐⭐',subs:[
+    'AFP: HCC (hepatocellular carcinoma) + testicular germ cell tumour; HCC diagnosis = hepatitis B + cachexia + jaundice + elevated AFP',
+    'CEA: colorectal cancer monitoring + breast cancer monitoring (NOT for initial diagnosis)',
+    'CA 15-3: breast cancer monitoring (more specific than CEA for breast)',
+    'CA 125: ovarian cancer monitoring',
+    'CA 19-9: pancreatic cancer',
+    'PSA: prostate cancer',
+    'β-HCG: choriocarcinoma + testicular germ cell',
+    'Calcitonin: medullary thyroid cancer (associated with MEN2, RET mutation)',
+    'HCC: chronic hepatitis B (#1 worldwide cause) or C → cirrhosis; AFP used for screening (q6m USS + AFP in cirrhosis)',
+    'Lynch syndrome/HNPCC: MLH1/MSH2 mutation; colon + endometrial + ovarian cancer; autosomal dominant; mid-30s onset',
+    'FAP: APC gene; >100 colonic polyps; MANDATORY colectomy; also Gardner syndrome (extracolonic features)',
+    'BRCA1/2: breast + ovarian cancer; prophylactic mastectomy/oophorectomy considered',
+    'EXAM TRAP: CEA vs CA 15-3 for breast cancer monitoring — either can be correct; CEA used more broadly, CA 15-3 more specific for breast. AFP + hepatitis B = HCC until proven otherwise.',
+  ]},
+  {id:'h11',name:'Polycythemia — PV vs Secondary',time:30,yield:'⭐⭐',subs:[
+    'Polycythemia Vera (primary): JAK2 V617F mutation; LOW/suppressed EPO (autonomous production); aquagenic pruritus; splenomegaly; treatment = venesection + hydroxyurea + aspirin',
+    'Secondary polycythemia: ELEVATED EPO in response to hypoxia; causes = COPD + high altitude + smoking + sleep apnoea',
+    'EXAM TRAP: COPD with HIGH Hb = SECONDARY polycythemia (from chronic hypoxia → ↑EPO). NOT polycythemia vera. Key differentiator = EPO level.',
+  ]},
+  {id:'h12',name:'G6PD & Haemolytic Anaemias',time:30,yield:'⭐⭐',subs:[
+    'G6PD: X-linked recessive; reduced NADPH → Heinz bodies + bite cells; episodic haemolysis',
+    'Screen for G6PD BEFORE starting: chloroquine, primaquine, dapsone, sulfonamides, nitrofurantoin, rasburicase',
+    'Hereditary spherocytosis: spectrin/ankyrin defect; Coombs NEGATIVE; osmotic fragility test diagnostic; splenectomy + pre-op vaccines',
+    'Warm autoimmune haemolytic anaemia: IgG antibodies (react at body temp); Coombs POSITIVE; steroids first-line',
+    'Cold agglutinin disease: IgM antibodies (react in cold); Coombs positive; avoid cold; rituximab',
+    'EXAM TRAP: Hereditary spherocytosis = Coombs NEGATIVE (intrinsic RBC defect, not antibody-mediated). Autoimmune haemolytic = Coombs POSITIVE (antibodies on surface).',
+  ]},
+],
+neuro:[
+  {id:'n1',name:'Stroke — Ischemic & Hemorrhagic',time:150,yield:'⭐⭐⭐',subs:[
+    'BEFAST: Balance, Eyes, Face, Arms, Speech, Time → activate stroke code',
+    'First step: non-contrast CT head (rule out haemorrhage BEFORE giving tPA)',
+    'DWI MRI: most sensitive for early ischaemia (<20 min); shows ischaemia as bright',
+    'tPA eligibility: onset <4.5h + BP <185/105 + no haemorrhage on CT + no contraindications',
+    'tPA contraindications: recent major surgery <14d, prior intracranial haemorrhage, haemorrhage on CT, platelet <100k, INR >1.7, glucose <2.8 or >22',
+    'BP management: treat ONLY if >185/105 before tPA; use IV labetalol; post-tPA target <180/105 for 24h',
+    'Mechanical thrombectomy: large vessel occlusion on CTA; window up to 24h in selected patients; better outcomes than tPA alone for LVO',
+    'Haemorrhagic stroke: aggressive BP lowering (<140/90); reverse anticoagulation (FFP/PCC for warfarin); neurosurgery if accessible/large',
+    'TIA: same imaging and workup as stroke; ABCD2 score; admit for 24-48h monitoring; high early stroke risk',
+    'Stroke workup: ECG + 24-48h holter (paroxysmal AF); carotid doppler; echocardiogram/TEE; lipid panel + HbA1c + CBC',
+    'Young stroke thrombophilia screen: APS, SLE, Factor V Leiden, Protein C/S deficiency, ATIII, homocysteine',
+    'Stroke mimics: Todd paralysis (post-seizure), migraine with aura, hypoglycaemia (CHECK GLUCOSE ALWAYS), Bell palsy, FND',
+    'NIHSS: quantifies stroke deficit; guides treatment decisions',
+    'EXAM TRAP: ALWAYS rule out hypoglycaemia before calling it a stroke. tPA window is 4.5h. BP must be <185/105 before tPA can be given.',
+  ]},
+  {id:'n2',name:'Seizures & Epilepsy',time:120,yield:'⭐⭐⭐',subs:[
+    'Focal onset with impaired awareness (temporal lobe): automatisms (lip smacking, chewing, repetitive movements), aura (metallic/iron taste, déjà vu, rising epigastric sensation), post-ictal confusion',
+    'Generalized tonic-clonic: LOC + tonic (stiffening) → clonic (jerking); tongue biting; urinary incontinence; prolonged post-ictal state',
+    'Status epilepticus: seizure ≥5 min OR ≥2 seizures without full recovery = EMERGENCY',
+    'ED management step 1: IV/IM lorazepam 0.1mg/kg OR rectal/IV diazepam (if no IV access) — this is FIRST STEP for acute seizure',
+    'ED management step 2: IV levetiracetam 60mg/kg OR IV phenytoin/fosphenytoin',
+    'ED management step 3: intubation + IV propofol or midazolam infusion (anaesthetic coma)',
+    'Patient on 2 AEDs presenting with seizure to ED: IV lorazepam/benzodiazepine is STILL the first step',
+    'Long-term AEDs: sodium valproate (broad spectrum, best for generalised + focal), levetiracetam (broad, safe in pregnancy), carbamazepine (focal first-line), ethosuximide (absence ONLY), lamotrigine',
+    'Aura types and location: iron/metallic taste = temporal lobe; visual aura = occipital; déjà vu = temporal/limbic; motor = frontal',
+    'Investigations: CT head (rule out structural), MRI (preferred for mesial temporal sclerosis), EEG (classify), metabolic screen (glucose, Na, Ca)',
+    'EXAM TRAP: First step for acute seizure = BENZODIAZEPINE (lorazepam or diazepam). Not AEDs. Diazepam = correct first-line regardless of which benzo is listed.',
+  ]},
+  {id:'n3',name:'Headache — All Types',time:90,yield:'⭐⭐⭐',subs:[
+    'MIGRAINE: unilateral, pulsating, moderate-severe, nausea/vomiting, photophobia + phonophobia; aggravated by activity; aura in 30% (visual scotoma, sensory); NO investigation if classic presentation',
+    'Migraine acute Rx: NSAIDs/paracetamol (mild); triptans (sumatriptan) for moderate-severe or NSAID failure; antiemetics (metoclopramide); avoid opioids',
+    'Migraine prophylaxis: propranolol (first-line) or amitriptyline or topiramate or valproate; CGRP antagonists (erenumab)',
+    'CLUSTER HEADACHE: severe unilateral periorbital pain + ipsilateral autonomic features (lacrimation, rhinorrhoea, ptosis, miosis, conjunctival injection); RESTLESS (moves around, unlike migraine); occurs in clusters; ABORT = 100% high-flow O₂ via NRB mask (first-line) OR sumatriptan SC; prophylaxis = verapamil',
+    'TENSION-TYPE: bilateral, pressing/band-like, mild-moderate, NO nausea, NO photophobia; most common primary headache; NSAIDs/paracetamol',
+    'IIH (Pseudotumor cerebri): obese young woman + papilloedema; normal CT → LP (diagnostic: opening pressure >25cmH₂O + therapeutic); treatment: acetazolamide + weight loss; papilloedema → LP urgently',
+    'SAH (subarachnoid haemorrhage): "worst headache of my life" + instantaneous peak ("thunderclap"); CT NCCT first (<6h 95% sensitive) → LP for xanthochromia if CT negative; neurosurgery',
+    'TEMPORAL/GIANT CELL ARTERITIS: >50y + jaw claudication + temporal artery tenderness + elevated ESR/CRP; HIGH DOSE STEROIDS IMMEDIATELY (do NOT wait for biopsy — risk of blindness); temporal artery biopsy confirms',
+    'RED FLAGS (SNOOP): Systemic symptoms, Neurological signs, Onset sudden, Old age >50, Papilloedema, Postural, Progressive',
+    'EXAM TRAP: Cluster headache = HIGH FLOW O₂ to abort (not sumatriptan first, not triptans). IIH = LP first (not MRI first, not acetazolamide first). GCA = steroids IMMEDIATELY.',
+  ]},
+  {id:'n4',name:"Parkinson's Disease",time:90,yield:'⭐⭐⭐',subs:[
+    'Cardinal motor features TRAP: Tremor (resting, pill-rolling, 4-6Hz, suppressed by voluntary movement), Rigidity (cogwheel), Akinesia/bradykinesia (slow, shuffling gait), Postural instability (falls)',
+    'Micrographia = small handwriting — classic feature often tested',
+    'Non-motor features: depression (#1 NMF), anosmia (often earliest symptom), REM sleep behaviour disorder (acts out dreams = often very early), autonomic (orthostatic hypotension, constipation, urinary urgency), cognitive impairment → PD dementia',
+    'Pathology: Lewy bodies (alpha-synuclein) in substantia nigra pars compacta → dopamine deficiency',
+    'Treatment: co-levodopa (levodopa + carbidopa) = most effective; dopamine agonists (pramipexole, ropinirole) = fewer motor complications; MAO-B inhibitors (selegiline); amantadine for dyskinesias',
+    'Motor complications: wearing-off (end-of-dose), on-off fluctuations, dyskinesias; DBS (deep brain stimulation) if refractory',
+    'Essential tremor vs Parkinson: ET = ACTION/postural tremor, bilateral, family history, IMPROVED BY ALCOHOL; Parkinson = RESTING, unilateral onset, bradykinesia + rigidity',
+    'EXAM TRAP: Parkinson = RESTING tremor (disappears with movement). Essential tremor = ACTION tremor (present during movement). Propranolol = ET treatment. Levodopa = Parkinson treatment.',
+  ]},
+  {id:'n5',name:'Multiple Sclerosis',time:90,yield:'⭐⭐',subs:[
+    'Relapsing-remitting MS (RRMS): discrete attacks with recovery; secondary progressive develops later',
+    'Optic neuritis: painful monocular vision loss + RAPD (relative afferent pupillary defect) + colour desaturation (washed-out red); first presentation of MS in many',
+    'INO (internuclear ophthalmoplegia): impaired adduction of ipsilateral eye + nystagmus in abducting eye; lesion in MLF (medial longitudinal fasciculus)',
+    'Lhermitte sign: electric shock sensation down spine on neck flexion (posterior column involvement)',
+    'Uhthoff phenomenon: worsening of symptoms with heat/exercise (not a new relapse)',
+    'MRI: periventricular white matter plaques; Dawson fingers (perpendicular to corpus callosum); enhancing lesions = active demyelination',
+    'CSF: oligoclonal IgG bands (>90% of MS); normal glucose; mildly elevated protein; lymphocytic pleocytosis in acute',
+    'McDonald criteria: dissemination in space AND time (clinical or MRI evidence)',
+    'Acute relapse: IV methylprednisolone 1g/day × 3-5 days (shortens attack duration)',
+    'Disease-modifying: interferon beta, glatiramer (injectable, first-line); natalizumab, fingolimod (higher efficacy)',
+    'EXAM TRAP: Female with one episode of monocular vision loss + past episode of limb tingling = MS. MS = RELAPSING episodes at DIFFERENT times and DIFFERENT locations.',
+  ]},
+  {id:'n6',name:'Meningitis & Encephalitis',time:90,yield:'⭐⭐⭐',subs:[
+    'BACTERIAL meningitis: fever + headache + neck stiffness + photophobia; Kernig sign + Brudzinski sign; CLASSICAL TRIAD',
+    'CSF bacterial: turbid/cloudy, ↑↑ neutrophils (>1000), ↑↑ protein, ↓↓ glucose (CSF:serum ratio <0.5); Gram stain + culture',
+    'CSF viral: clear, lymphocytes (100-500), mildly elevated protein, NORMAL glucose',
+    'CSF TB/fungal: lymphocytes, very high protein, very low glucose',
+    'LP contraindications: raised ICP with mass effect (papilloedema + focal signs + ↓consciousness → CT FIRST); coagulopathy (INR >1.4, plt <50k); skin infection at puncture site',
+    'Bacterial meningitis Rx: CEFTRIAXONE IV (all ages); ADD AMPICILLIN if neonate or >60y (Listeria cover); DEXAMETHASONE (before or with first dose of antibiotics to reduce inflammation)',
+    'HSV encephalitis: acyclovir IV empirically if CSF lymphocytosis + high protein + normal glucose + confusion + focal features; MRI temporal lobe changes',
+    'Meningococcemia: petechial/purpuric rash + septicaemia → DO NOT delay antibiotics for LP; benzylpenicillin or ceftriaxone IV',
+    'CSF glucose high (0.7 ratio to serum): VIRAL meningitis (glucose preserved); test used: CSF:serum glucose ratio; normal >0.6',
+    'EXAM TRAP: Meningitis + petechial rash = meningococcal septicaemia → give antibiotics IMMEDIATELY, do NOT wait for LP. Kernig = negative in viral (important differentiator in question stems).',
+  ]},
+  {id:'n7',name:'GBS & Miller-Fisher',time:60,yield:'⭐⭐⭐',subs:[
+    'GBS: acute inflammatory demyelinating polyneuropathy; ascending flaccid weakness + areflexia; post-infectious (Campylobacter jejuni = most common trigger, also EBV, CMV)',
+    'CSF: albuminocytological dissociation = HIGH protein + NORMAL/near-normal WBC (pathognomonic)',
+    'EMG/NCS: slow nerve conduction velocity (demyelinating pattern)',
+    'Autonomic involvement: cardiac arrhythmias, BP instability, urinary retention → cardiac monitoring mandatory',
+    'Respiratory: serial FVC; FVC <20ml/kg or <1L → intubate; do NOT wait for SpO₂ to drop (late sign)',
+    'Treatment: IVIG 2g/kg over 5 days OR plasmapheresis (equal efficacy); steroids NOT effective in GBS',
+    'Miller-Fisher Syndrome: GQ1b antibodies; triad = ophthalmoplegia + ataxia + areflexia (cranial nerve variant)',
+    'EXAM TRAP: GBS diagnosis = ascending weakness + areflexia + CSF dissociation (high protein + normal cells). Treatment = IVIG OR plasma exchange (steroids are NOT effective).',
+  ]},
+  {id:'n8',name:'Myasthenia Gravis',time:60,yield:'⭐⭐⭐',subs:[
+    'Pathology: anti-AChR antibodies at neuromuscular junction (NMJ); impaired neuromuscular transmission; 10-15% = MuSK antibodies (seronegative MG)',
+    'Clinical: fatigable weakness WORSE with activity, BETTER with rest; ptosis + diplopia (most common); bulbar (dysphagia, nasal voice)',
+    'Diagnosis: AChR antibodies (most specific); EMG = decremental response to 3Hz repetitive stimulation; Tensilon (edrophonium) test = AChE inhibitor → transient improvement in ptosis confirms MG',
+    'CT chest for ALL MG patients (thymoma in 10-15%)',
+    'Myasthenic crisis: sudden respiratory failure → ICU + intubation + IVIG or plasmapheresis',
+    'Cholinergic crisis (from excess pyridostigmine): SLUDGE + weakness; worsened by Tensilon; Rx = stop pyridostigmine',
+    'Treatment: pyridostigmine (symptomatic, AChE inhibitor); prednisolone + azathioprine (immunosuppression); thymectomy (if thymoma or age <60y with generalised MG)',
+    'Contraindicated drugs: aminoglycosides, fluoroquinolones, β-blockers, Mg, chloroquine (worsen NMJ)',
+    'EXAM TRAP: Diagnosis of MG = AChR antibodies or EMG (decremental response). First investigation to confirm = antibody test. EMG if antibody negative.',
+  ]},
+  {id:'n9',name:'Cranial Nerve Palsies',time:90,yield:'⭐⭐',subs:[
+    'CN III: down-and-out gaze + ptosis + mydriasis (pupil involved); SURGICAL cause = PCOM aneurysm (painful!); MEDICAL/ischaemic cause = DM/HTN (pupil SPARED)',
+    'CN VI: failure to abduct (lateral gaze palsy); false localising sign in raised ICP',
+    'CN VII UMN lesion: contralateral LOWER face only (forehead spared = bilateral cortical representation of forehead)',
+    'CN VII LMN lesion: entire IPSILATERAL face weakness (forehead + lower face); causes = Bell palsy + parotid tumour + acoustic neuroma + otitis media',
+    "Bell's palsy: idiopathic LMN facial nerve palsy (HSV reactivation); complete unilateral face paresis; treat with prednisolone within 72h ± acyclovir; eye lubrication; most recover fully",
+    'CN V trigeminal neuralgia: electric shock-like lancinating pain triggered by touch to face; carbamazepine first-line',
+    'Horner syndrome: ptosis (partial) + miosis + anhidrosis; ipsilateral; causes = Pancoast tumour + carotid dissection + lateral medullary syndrome',
+    'CN XII: tongue deviates TO side of LMN lesion; tongue deviates AWAY in UMN lesion',
+    'EXAM TRAP: Bell palsy = forehead INVOLVED (LMN). Central (UMN) facial weakness = forehead SPARED. This is the most tested CN VII distinction.',
+  ]},
+  {id:'n10',name:'Peripheral Neuropathy',time:60,yield:'⭐⭐',subs:[
+    'Pattern: length-dependent (glove-and-stocking) = most common; longest axons affected first',
+    'Carpal tunnel (median nerve): lateral 3.5 fingers + thenar wasting; Tinel + Phalen signs; common in PREGNANCY; Rx = wrist splint → steroid injection → surgical decompression',
+    'Ulnar nerve: medial 2 fingers + hypothenar wasting; claw hand (ring + little fingers); lesion at wrist or elbow',
+    'Common peroneal: foot drop + lateral ankle/dorsum foot numbness; caused by compression at fibular head',
+    'Common causes: diabetes (#1), alcohol, B12 deficiency, uraemia, hypothyroidism, HIV, chemotherapy, amyloidosis, hereditary (Charcot-Marie-Tooth)',
+    'Investigations: NCS/EMG (gold standard); glucose/HbA1c, B12, TSH, RFTs, SPEP, anti-Hu (paraneoplastic)',
+    'Neuropathic pain treatment: gabapentin, pregabalin (first-line); duloxetine (especially diabetic); amitriptyline; topical capsaicin/lidocaine',
+    'EXAM TRAP: Carpal tunnel = LATERAL 3.5 fingers (thumb, index, middle, half of ring). Ulnar = MEDIAL 1.5 fingers (ring and little).',
+  ]},
+  {id:'n11',name:'GCS Calculation',time:30,yield:'⭐⭐⭐',subs:[
+    'Eyes (E 1-4): Spontaneous=4, To Voice=3, To Pain=2, None=1',
+    'Verbal (V 1-5): Oriented=5, Confused=4, Words only=3, Sounds only=2, None=1',
+    'Motor (M 1-6): Obeys commands=6, Localises pain=5, Withdraws=4, Abnormal flexion (decorticate)=3, Extension (decerebrate)=2, None=1',
+    'GCS ≤8 = intubate (loss of protective airway reflexes); GCS 9-12 = moderate; 13-15 = mild',
+    'Always record E+V+M separately (e.g., E3V4M5 = GCS 12)',
+    'Assess BEFORE sedation; document changes over time',
+    'EXAM TRAP: Practice calculating: "Opens eyes to voice, confused speech, withdraws from pain" = E3+V4+M4 = GCS 11.',
+  ]},
+  {id:'n12',name:'ALS / Motor Neuron Disease',time:45,yield:'⭐⭐',subs:[
+    'UMN + LMN signs in SAME patient at MULTIPLE levels = diagnostic hallmark of ALS',
+    'UMN signs: spasticity, hyperreflexia, extensor plantar (Babinski), clonus',
+    'LMN signs: fasciculations, wasting, flaccidity, areflexia',
+    'Bulbar palsy (LMN CN IX/X/XII): tongue fasciculations + wasting + dysphagia + nasal voice',
+    'Pseudobulbar palsy (UMN): brisk jaw jerk + emotional lability + dysarthria',
+    'Spares: sensation, eye movements, sphincters, cognition (until late)',
+    'Investigations: EMG (fibrillation potentials + denervation), MRI to exclude structural mimics',
+    'Riluzole: glutamate antagonist; modest survival benefit (~3m); only disease-modifying drug',
+    'Supportive: SALT + PT + OT + NIV (BiPAP when FVC <50%) + PEG feeding + early palliative planning',
+  ]},
+  {id:'n13',name:'Ataxia — Cerebellar vs Sensory',time:30,yield:'⭐⭐',subs:[
+    'Cerebellar ataxia: DANISH mnemonic — Dysdiadochokinesia, Ataxic gait (wide-based), Nystagmus (horizontal), Intention tremor, Slurred (scanning) speech, Hypotonia; Romberg test NEGATIVE',
+    'Sensory ataxia: posterior column dysfunction; Romberg test POSITIVE (worse with eyes closed); high-stepping gait; causes: B12 deficiency, tabes dorsalis, MS',
+    'Causes of cerebellar ataxia: alcohol (#1), MS, stroke (PICA), posterior fossa tumour, paraneoplastic (anti-Yo), hypothyroidism, drugs (phenytoin, carbamazepine)',
+    'EXAM TRAP: Romberg test positive = SENSORY ataxia. Romberg negative = cerebellar ataxia.',
+  ]},
+  {id:'n14',name:'Syncope',time:30,yield:'⭐',added:true,subs:[
+    'Vasovagal (neurocardiogenic): triggered by pain/heat/prolonged standing/emotional stress; prodrome = nausea + diaphoresis + lightheadedness; rapid recovery; benign',
+    'Cardiac syncope: no prodrome, exertional, associated with palpitations; arrhythmias (VT, complete heart block), structural (HCM, aortic stenosis); HIGHER MORTALITY',
+    'Orthostatic hypotension: SBP drop ≥20 or DBP drop ≥10 mmHg on standing; dehydration, elderly, Parkinson, antihypertensives',
+    'Workup: ECG (arrhythmia, long QT), echo (structural), Holter (paroxysmal arrhythmia), tilt table test (vasovagal)',
+  ]},
+  {id:'n15',name:'Vertigo',time:30,yield:'⭐',added:true,subs:[
+    'BPPV: episodic seconds-minutes, triggered by head position change; posterior canal most common; Dix-Hallpike test = upbeat-torsional nystagmus; Rx = Epley maneuver',
+    "Ménière's: episodic vertigo (20min-24h) + low-frequency SNHL + tinnitus + aural fullness; increased endolymph; betahistine + salt restriction",
+    'Vestibular neuritis: sudden continuous severe vertigo; no hearing loss; post-viral; HINTS exam (abnormal head impulse test = peripheral); vestibular rehab',
+    'Central vertigo: direction-changing nystagmus; NO corrective saccade on head impulse = CENTRAL (danger sign); HINTS exam; MRI DWI (brainstem stroke)',
+  ]},
+],
+};
+
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+let state = {};
+function loadState() {
+  try { state = JSON.parse(localStorage.getItem('shelf_state') || '{}'); }
+  catch(e) { state = {}; }
+}
+function saveState() {
+  localStorage.setItem('shelf_state', JSON.stringify(state));
+}
+function getSubKey(tid, si) { return tid + '_' + si; }
+function isSubDone(tid, si) { return !!state[getSubKey(tid, si)]; }
+function toggleSub(tid, si) {
+  const k = getSubKey(tid, si);
+  state[k] = !state[k];
+  saveState();
+}
+function isTopicDone(t) { return t.subs.every((_,i) => isSubDone(t.id, i)); }
+function subsDone(t) { return t.subs.filter((_,i) => isSubDone(t.id, i)).length; }
+function resetRotation(rid) {
+  const topics = TOPICS[rid];
+  topics.forEach(t => t.subs.forEach((_,i) => delete state[getSubKey(t.id,i)]));
+  saveState(); render();
+}
+
+// ══════════════════════════════════════════════════════════════
+// PROGRESS CALCS
+// ══════════════════════════════════════════════════════════════
+function rotProgress(rid) {
+  const ts = TOPICS[rid];
+  const total = ts.reduce((a,t) => a + t.subs.length, 0);
+  const done = ts.reduce((a,t) => a + subsDone(t), 0);
+  return total === 0 ? 0 : Math.round(done/total*100);
+}
+function overallProgress() {
+  let total = 0, done = 0;
+  ROTS.forEach(r => {
+    const ts = TOPICS[r.id];
+    const w = r.weight / 100;
+    const t = ts.reduce((a,tp) => a + tp.subs.length, 0);
+    const d = ts.reduce((a,tp) => a + subsDone(tp), 0);
+    total += t * w;
+    done += d * w;
+  });
+  return total === 0 ? 0 : Math.round(done/total*100);
+}
+
+// ══════════════════════════════════════════════════════════════
+// ACTIVE TAB
+// ══════════════════════════════════════════════════════════════
+let activeRid = 'em';
+function setTab(rid) { activeRid = rid; render(); }
+
+// ══════════════════════════════════════════════════════════════
+// DAYS LEFT
+// ══════════════════════════════════════════════════════════════
+function daysLeft() {
+  const exam = new Date('2026-04-27');
+  const now = new Date();
+  const diff = Math.ceil((exam - now) / (1000*60*60*24));
+  return diff;
+}
+
+// ══════════════════════════════════════════════════════════════
+// PANELS
+// ══════════════════════════════════════════════════════════════
+let openPanel = null;
+function togglePanel(name) {
+  const p = document.getElementById('panel-' + name);
+  const btn = event.currentTarget;
+  if (openPanel === name) {
+    p.classList.remove('open');
+    btn.classList.remove('active');
+    openPanel = null;
+  } else {
+    if (openPanel) {
+      document.getElementById('panel-' + openPanel).classList.remove('open');
+      document.querySelectorAll('.panel-btn').forEach(b => b.classList.remove('active'));
+    }
+    p.classList.add('open');
+    btn.classList.add('active');
+    openPanel = name;
+  }
+}
+
+function confirmReset() {
+  if (confirm('Reset ALL progress? This cannot be undone.')) {
+    state = {};
+    saveState();
+    render();
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// EXPANDED TOPICS
+// ══════════════════════════════════════════════════════════════
+const expanded = new Set();
+function toggleExpand(tid) { expanded.has(tid) ? expanded.delete(tid) : expanded.add(tid); renderTopics(); }
+
+// ══════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════
+function render() {
+  renderHeader();
+  renderTabs();
+  renderTopics();
+}
+
+function renderHeader() {
+  const pct = overallProgress();
+  document.getElementById('ovr-pct').textContent = pct + '%';
+  document.getElementById('ovr-bar').style.width = pct + '%';
+  const d = daysLeft();
+  document.getElementById('daysLeft').textContent = d > 0 ? `📅 ${d} days until exam · Review week starts Apr 20` : '📅 EXAM DAY!';
+
+  const mini = document.getElementById('rot-mini-bars');
+  mini.innerHTML = ROTS.map(r => {
+    const p = rotProgress(r.id);
+    const active = r.id === activeRid ? 'active-tab' : '';
+    return `<div class="rot-mini ${active}" onclick="setTab('${r.id}')" style="--accent:${r.color}">
+      <div class="rot-mini-label">${r.emoji} ${r.label}</div>
+      <div class="rot-mini-pct" style="color:${r.color}">${p}%</div>
+      <div class="rot-mini-bar"><div class="rot-mini-fill" style="background:${r.color};width:${p}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderTabs() {
+  // handled inline
+}
+
+function renderTopics() {
+  const container = document.getElementById('tab-contents');
+  const r = ROTS.find(x => x.id === activeRid);
+  const topics = TOPICS[activeRid];
+  const pct = rotProgress(activeRid);
+  const totalHours = Math.round(topics.reduce((a,t) => a+t.time, 0) / 60 * 10) / 10;
+  const doneHours = Math.round(topics.reduce((a,t) => isTopicDone(t) ? a+t.time : a, 0) / 60 * 10) / 10;
+
+  let html = `
+  <div class="rot-header" style="background:${r.bg};border-color:${r.color}">
+    <div class="rot-header-row">
+      <div>
+        <div class="rot-title" style="color:${r.color}">${r.emoji} ${r.label}</div>
+        <div class="rot-sub">${r.weight}% of exam · ${topics.length} topic areas · ~${totalHours}h total</div>
+      </div>
+      <div class="rot-stats">
+        <div class="rot-pct-big" style="color:${r.color}">${pct}%</div>
+        <div class="rot-hours">${doneHours}h / ${totalHours}h mastered</div>
+        <button class="reset-btn" onclick="resetRotation('${r.id}')">↺ Reset rotation</button>
+      </div>
+    </div>
+    <div class="rot-bar-track"><div class="rot-bar-fill" style="background:${r.color};width:${pct}%"></div></div>
+  </div>
+  <div class="yield-legend">
+    <span><span style="background:#dc2626;width:8px;height:8px;border-radius:50%;display:inline-block"></span> ⭐⭐⭐ Very High Yield</span>
+    <span><span style="background:#d97706;width:8px;height:8px;border-radius:50%;display:inline-block"></span> ⭐⭐ High Yield</span>
+    <span><span style="background:#6b7280;width:8px;height:8px;border-radius:50%;display:inline-block"></span> ⭐ Medium Yield</span>
+    <span style="margin-left:8px;color:#1d4ed8;font-size:10px">🔵 [*Added] = topic added beyond your source documents</span>
+  </div>`;
+
+  topics.forEach(t => {
+    const done = isTopicDone(t);
+    const sd = subsDone(t);
+    const pct = Math.round(sd/t.subs.length*100);
+    const isOpen = expanded.has(t.id);
+    const yDot = t.yield === '⭐⭐⭐' ? '#dc2626' : t.yield === '⭐⭐' ? '#d97706' : '#9ca3af';
+    html += `
+    <div class="topic-card ${done ? 'completed' : ''}" id="card-${t.id}">
+      <div class="topic-header" onclick="toggleExpand('${t.id}')">
+        <div class="big-cb ${done ? 'checked' : ''}" onclick="event.stopPropagation();toggleAllSubs('${t.id}')">${done ? '✓' : ''}</div>
+        <div class="yield-dot" style="background:${yDot}"></div>
+        <div class="topic-info">
+          <div class="topic-name">
+            ${t.name}
+            ${t.added ? '<span class="added-badge">🔵 Added</span>' : ''}
+          </div>
+          <div class="topic-meta">
+            <span>${t.yield}</span>
+            <span>${sd}/${t.subs.length} subtopics</span>
+          </div>
+          ${sd > 0 && sd < t.subs.length ? `<div class="subtopic-progress"><div class="subtopic-progress-fill" style="background:${r.color};width:${pct}%"></div></div>` : ''}
+        </div>
+        <div class="topic-right">
+          <div class="time-chip">⏱ ${t.time >= 60 ? Math.floor(t.time/60)+'h'+(t.time%60 ? (t.time%60)+'m' : '') : t.time+'m'}</div>
+          <div class="expand-btn">${isOpen ? '▲' : '▼'}</div>
+        </div>
+      </div>
+      <div class="subtopics-wrap ${isOpen ? 'open' : ''}">
+        ${t.subs.map((s,i) => {
+          const sdone = isSubDone(t.id, i);
+          return `<div class="sub-item">
+            <div class="sub-cb ${sdone ? 'checked' : ''}" onclick="toggleSubUI('${t.id}',${i})">${sdone ? '✓' : ''}</div>
+            <div class="sub-text ${sdone ? 'done-text' : ''}" id="sub-${t.id}-${i}">${s}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function toggleSubUI(tid, si) {
+  toggleSub(tid, si);
+  // update just this sub item
+  const done = isSubDone(tid, si);
+  const cb = document.querySelector(`#sub-${tid}-${si}`).previousElementSibling;
+  const text = document.getElementById(`sub-${tid}-${si}`);
+  cb.className = 'sub-cb ' + (done ? 'checked' : '');
+  cb.textContent = done ? '✓' : '';
+  text.className = 'sub-text ' + (done ? 'done-text' : '');
+  // update parent card
+  const t = Object.values(TOPICS).flat().find(x => x.id === tid);
+  const sd = subsDone(t);
+  const isAllDone = isTopicDone(t);
+  const card = document.getElementById('card-' + tid);
+  if (card) {
+    card.className = 'topic-card ' + (isAllDone ? 'completed' : '');
+    const bigCb = card.querySelector('.big-cb');
+    bigCb.className = 'big-cb ' + (isAllDone ? 'checked' : '');
+    bigCb.textContent = isAllDone ? '✓' : '';
+  }
+  renderHeader();
+}
+
+function toggleAllSubs(tid) {
+  const t = Object.values(TOPICS).flat().find(x => x.id === tid);
+  const allDone = isTopicDone(t);
+  t.subs.forEach((_,i) => { state[getSubKey(tid, i)] = !allDone; });
+  saveState();
+  render();
+}
+
+// ══════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════
+loadState();
+render();
+</script>
+</body>
+</html>
